@@ -1,8 +1,74 @@
 body, html{
+    margin: 0;
     height: 100%;
 }
 
 a.nav-link{
-    color: #000;
+    color: #fff;
     font-weight: 500;
+}
+
+a#comp-name{
+    font-size: 24px;
+    padding: 10px 0px;
+}
+
+a.nav-link:hover, a#comp-name:hover{
+    color: #fff;
+}
+
+#position-right{
+    position: absolute;
+    right: 0;
+}
+
+#top-section{
+    position: relative;
+    top: 0;
+    margin: 0;
+    height: 56px;
+    background-color: #444444;
+    width: 100%;
+}
+
+#middle-section{
+    position: relative;
+    padding: 10px 10px;
+    margin: 0;
+    background-color: #fff;
+    width: 100%;
+    height: auto;
+}
+
+#bottom-section{
+    position: relative;
+    bottom: 0;
+    margin: 0;
+    padding: 10px 10px;
+    height: 100px;
+    background-color: #fff;
+    width: 100%;
+}
+
+#absolute-bottom{
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    padding: 10px 10px;
+    height: 100px;
+    background-color: #fff;
+    width: 100%;
+}
+
+#nav{
+    display: inline-block;
+    width: 15%;
+    padding: 10px;
+}
+
+#content{
+    display: inline-block;
+    height: 100%;
+    width: 85%;
+    padding: 10px;
 }
