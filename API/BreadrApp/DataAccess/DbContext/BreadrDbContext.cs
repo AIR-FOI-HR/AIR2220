@@ -16,6 +16,10 @@ namespace DataAccess.DBContext
         }
 
         public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Log> Logs { get; set; }
+        public DbSet<Gate> Gates { get; set; }
+        public DbSet<Receipt> Receipts { get; set; }
 
     }
 }
