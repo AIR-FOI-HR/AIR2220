@@ -2,8 +2,12 @@ body, html{
     margin: 0;
     height: 100%;
 }
+a:link{text-decoration: none;}
+a:hover{text-decoration: none;}
+a:visited{text-decoration: none;}
+a:active{text-decoration: none;}
 
-a.nav-link{
+a.top-bar{
     color: #fff;
     font-weight: 500;
 }
@@ -11,10 +15,35 @@ a.nav-link{
 a#comp-name{
     font-size: 24px;
     padding: 10px 0px;
+    margin-left: 18px;
 }
 
-a.nav-link:hover, a#comp-name:hover{
+#sign-out:hover{
+    color: #DEE2E6;
+}
+
+a.top-bar:hover, a#comp-name:hover{
     color: #fff;
+    text-decoration: none;
+}
+
+a.nav-link{
+    color: #000;
+    font-weight: 500;
+    font-size: 18px;
+    margin: 10px;
+}
+
+a.nav-link:hover{
+    color: #000;
+}
+
+.nav-item:hover{
+    background-color: #DEE2E6;
+}
+
+.active{
+    background-color: #DEE2E6;
 }
 
 #position-right{
@@ -33,7 +62,7 @@ a.nav-link:hover, a#comp-name:hover{
 
 #middle-section{
     position: relative;
-    padding: 10px 10px;
+    padding: 0;
     margin: 0;
     background-color: #fff;
     width: 100%;
@@ -48,6 +77,8 @@ a.nav-link:hover, a#comp-name:hover{
     height: 100px;
     background-color: #fff;
     width: 100%;
+    text-align: center;
+    justify-content: center;
 }
 
 #absolute-bottom{
@@ -58,17 +89,39 @@ a.nav-link:hover, a#comp-name:hover{
     height: 100px;
     background-color: #fff;
     width: 100%;
+    text-align: center;
+    justify-content: center;
 }
 
 #nav{
     display: inline-block;
     width: 15%;
-    padding: 10px;
+    padding: 0;
 }
 
 #content{
     display: inline-block;
     height: 100%;
     width: 85%;
-    padding: 10px;
+    padding: 10px 30px;
+}
+
+.info{
+    height: 10px;
+}
+
+#CU-section{
+    width: 30%;
+}
+
+.signIn{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 15%;
+    top: 20%;
+}
+
+#signIn-h1{
+    text-align: center;
 }

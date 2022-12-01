@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="AIR2220"/>
+        <meta name="keywords" content="Bakery, Vending, Machine"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../CSS/BakeryVendingMachineCSS.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script type="text/javascript" src="../JS/BakeryVendingMachineJS.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <title>BakeryVendingMachine</title>
+    </head>
+    <body>
+      <div class="row sticky-top" id="top-section">
+        <div class="col-sm-3 p-2">
+          <a class="text-nowrap top-bar" id="comp-name" href="./dashboard.html">Bakery Vending Machine</a>
+        </div>
+        <div class="col-sm-1 text-nowrap p-3" id="position-right">
+          <a class="top-bar" id="sign-out" href="./signIn.html">Sign out</a>
+        </div>
+      </div>
+
+      <div class="row" id="middle-section">
+
+        <div class="border-right" id="nav">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="./dashboard.html">
+                  Dashboard
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./gates.html">
+                Gates
+              </a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="./reports.html">
+                Event reports
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./statistics.html">
+                Statistics
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div id="content">
+          <h1>Event reports</h1>
+          <br>
+          <div class="table-responsive-xl" id="table-reports">
+            <table class="table table-striped table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">User</th>
+                  <th scope="col">Product</th>
+                  <th scope="col">Lat</th>
+                  <th scope="col">Lon</th>
+                  <th scope="col">Date and time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">User 1</th>
+                  <td>Baguette</td>
+                  <td>5.1</td>
+                  <td>1.5</td>
+                  <td>10:01 1.12.2022.</td>
+                </tr>
+                <tr>
+                  <th scope="row">User 2</th>
+                  <td>Croissant</td>
+                  <td>10.10</td>
+                  <td>1.1</td>
+                  <td>10:10 1.12.2022.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row border-top" id="bottom-section">
+        <span>
+          <b>WBL Project with Mobilisis</b>
+          <br>
+          AIR2220
+          <br>
+          Bakery Vending Machine
+        </span>
+      </div>
+    </body>
+</html>
