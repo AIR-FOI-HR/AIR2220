@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breadr", "Breadr\Breadr.csproj", "{42310CE6-5527-4204-97F8-97777BFEEE4F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Breadr", "Breadr\Breadr.csproj", "{42310CE6-5527-4204-97F8-97777BFEEE4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{98E1D06B-19A9-4981-8704-FB5B2675B1DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{98E1D06B-19A9-4981-8704-FB5B2675B1DA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{6F693594-4A96-4CBC-B0BC-4963ACD7DEDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{6F693594-4A96-4CBC-B0BC-4963ACD7DEDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
