@@ -1,5 +1,7 @@
 using DataAccess.DBContext;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Service.Report;
 
 namespace Breadr
 {
@@ -19,6 +21,9 @@ namespace Breadr
             builder.Services.AddDbContext<BreadrDbContext>(options => options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
+            builder.Services.AddScoped<IReportService, ReportService>();
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

@@ -16,4 +16,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Breadr.Core\Breadr.Core.csproj" />
+    <ProjectReference Include="..\DataAccess\Breadr.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

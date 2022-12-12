@@ -1,12 +1,15 @@
 ﻿using AutoMapper;
+using Breadr.Core.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Service.Report;
 using Service.Report.Models;
+using System.Threading.Tasks;
 
 namespace Breadr.Controllers
 {
-    public class ReportController : Controller
+    [ApiController]
+    public class ReportController : ApiControllerBase
     {
 
         private readonly IReportService _reportService;
@@ -19,15 +22,19 @@ namespace Breadr.Controllers
         }
 
         [HttpGet("AllReports")]
-
         public async Task<IActionResult> GetAllReports()
         {
-            GetAllReportsRequest request = new GetAllReportsRequest();
 
+            GetAllReportsRequest request = CreateServiceRequest<GetAllReportsRequest>();
+            GetAllReportsResponse response = await _reportService.GetAllReports(request);
 
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
 
-
-            return Ok();
+            return Ok(response.AllReports);
         }
+
     }
 }
