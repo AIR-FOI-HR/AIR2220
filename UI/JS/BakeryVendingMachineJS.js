@@ -11,8 +11,34 @@ $(document).ready(function(){
         $("#error").hide();
         $("#error").empty();
         if(($("#email").val() != "") && ($("#password").val() != "")){
+            //change URL
             var email = $("#email").val();
             var password = $("#password").val();
+            
+            var URL = "MOCK_URL";
+            //Hash password
+            //var hashedPass = cypto.subtle.digest('SHA-256', new TextEncoder().encode("999"+password));
+            //console.log(hashedPass);
+            //SEND: email, RECEIVE: password, salt, role_id
+            //check ajax request! and chect request type on confluence
+            /*
+            $.ajax({type: "GET", url: URL, dataType: "json", data: {email}, complete: function(data){
+                var user = $.parseJSON(data.responseText);
+
+                if(user["user_id"] != null){
+                    var hashedPass = cypto.subtle.digest('SHA-256', new TextEncoder().encode(user["salt"]+password));
+                    if(hashedPass == user["password"] && user["role_id"] == 1){
+                        //set cookie to check login status
+                        window.location.replace("./dashboard.html");
+                    }else{
+                        $("#error").show();
+                        $("#error").append("<span>Incorrect email or password!</span>");
+                    }
+                }else{
+                    $("#error").show();
+                    $("#error").append("<span>Incorrect email or password!</span>");
+                }
+            }});*/
             if(email == "dcapek@foi.hr" && password == "1234"){
                 window.location.replace("./dashboard.html");
             }else{
