@@ -8,43 +8,39 @@ $(document).ready(function(){
 
     $("#btnSignIn").click(function(e){
         e.preventDefault();
+        //temp for time saving
+        $("#email").val("pperic@gmail.com");
         $("#error").hide();
         $("#error").empty();
         if(($("#email").val() != "") && ($("#password").val() != "")){
-            //change URL
             var email = $("#email").val();
             var password = $("#password").val();
-            
-            var URL = "MOCK_URL";
-            //Hash password
-            //var hashedPass = cypto.subtle.digest('SHA-256', new TextEncoder().encode("999"+password));
-            //console.log(hashedPass);
-            //SEND: email, RECEIVE: password, salt, role_id
-            //check ajax request! and chect request type on confluence
-            /*
-            $.ajax({type: "GET", url: URL, dataType: "json", data: {email}, complete: function(data){
-                var user = $.parseJSON(data.responseText);
 
-                if(user["user_id"] != null){
-                    var hashedPass = cypto.subtle.digest('SHA-256', new TextEncoder().encode(user["salt"]+password));
-                    if(hashedPass == user["password"] && user["role_id"] == 1){
-                        //set cookie to check login status
-                        window.location.replace("./dashboard.html");
-                    }else{
-                        $("#error").show();
-                        $("#error").append("<span>Incorrect email or password!</span>");
-                    }
+            //temp if for working with mock api
+            if(password == "1234"){
+                // JSON: {"name":"Pero", "surname":"Peric", "email":"pperic@gmail.com", "username": "pperic", "rolse_id":1}
+                var URL = "https://mocki.io/v1/71c3eef6-f4ca-43f3-ae8f-16524480bff1";
+            }else{
+                //JSON: {"name":null, "surname":null, "email":null, "username": null, "rolse_id":null}
+                var URL = "https://mocki.io/v1/e27d8a2f-574f-4cfd-bfb3-a9b1dde4bcf5";
+            }
+
+            //SEND: email,password RECEIVE: name, surname, email, username, role_id
+            //check ajax request! and chect request type on confluence
+
+            //COVERT TO POST request type!!
+            $.ajax({type: "GET", url: URL, data: {email: email, password: password}, dataType: "json", complete: function(data){
+                var user = $.parseJSON(data.responseText);
+                
+                //change to role_id!
+                if(user["name"] != null && user["rolse_id"] == 1){
+                    //set cookie to check login status
+                    window.location.replace("./dashboard.html");
                 }else{
                     $("#error").show();
                     $("#error").append("<span>Incorrect email or password!</span>");
                 }
-            }});*/
-            if(email == "dcapek@foi.hr" && password == "1234"){
-                window.location.replace("./dashboard.html");
-            }else{
-                $("#error").show();
-                $("#error").append("<span>Incorrect email or password!</span>");
-            }
+            }});
         }else{
             $("#error").show();
             $("#error").append("<span>Incorrect email or password!</span>");
