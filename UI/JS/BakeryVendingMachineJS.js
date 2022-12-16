@@ -1,10 +1,15 @@
 $(document).ready(function(){
     console.log("JS is connected.");
-    $("#error").hide();
+    
+    if(!checkSignInCookie()){
+        var path = window.location.pathname;
+        var page = path.split("/").pop().split(".")[0];
+        if(page != "signIn"){
+            window.location.replace("./signIn.html");
+        }
+    }
 
-    $("#map").ready(function(){
-        console.log("Ready");
-    });
+    $("#error").hide();
 
     $("#btnSignIn").click(function(e){
         e.preventDefault();
@@ -34,7 +39,11 @@ $(document).ready(function(){
                 
                 //change to role_id!
                 if(user["name"] != null && user["rolse_id"] == 1){
-                    //set cookie to check login status
+                    var expDate = new Date;
+                    expDate.setDate(parseInt(expDate.getDate()) + parseInt(1));
+                    var cookieString = "signedIn=" + user["username"] + "; expires=" + expDate + ";path=/";
+                    document.cookie = cookieString;
+
                     window.location.replace("./dashboard.html");
                 }else{
                     $("#error").show();
@@ -46,6 +55,32 @@ $(document).ready(function(){
             $("#error").append("<span>Incorrect email or password!</span>");
         }
     });
+
+    $("#sign-out").click(function(e){
+        var expDate = new Date;
+        var cookieString = "signedIn=null; expires=" + expDate + ";path=/";
+        document.cookie = cookieString;
+    });
+
+    function checkSignInCookie(){
+        var cookies = document.cookie.split('; ');
+        if(cookies !== null){
+            for(var i=0; i<cookies.length; i++){
+                var cookieName = cookies[i].split('=');
+                if(cookieName[0] === "signedIn"){
+                    if(cookieName[1] !== "null"){
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            }
+            return false;
+        }
+        else{
+            return false;
+        }
+    }
 });
 
 function initMap() {
