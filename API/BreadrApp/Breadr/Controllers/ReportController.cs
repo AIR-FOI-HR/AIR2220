@@ -40,8 +40,8 @@ namespace Breadr.Controllers
 
             return Ok(response.AllReports);
         }
-
-        /*[HttpGet("ReportsByUser/{userId}")]
+        /*
+        [HttpGet("ReportsByUser/{userId}")]
         public async Task<IActionResult> GetReportsByUser([FromRoute]int userId)
         {
 
@@ -53,12 +53,14 @@ namespace Breadr.Controllers
                 return BadRequest(response.Message);
             }
 
-            return Ok(response.Report);
-        }*/
+            return Ok(response.Reports);
+        }
+        */
 
         //LOGIN
 
-        /*[HttpPost("GetSaltByEmail")]
+        /*
+        [HttpPost("GetSaltByEmail")]
         public async Task<IActionResult> GetSaltByEmail([FromBody]string email)
         {
 
@@ -71,10 +73,11 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Salt);
-        }*/
+        }
+        */
 
-
-        /*[HttpPost("LoginUser")]
+        /*
+        [HttpPost("LoginUser")]
         public async Task<IActionResult> LoginUser([FromBody]JsonArray payload) //JSON ARRAY???
         {
 
@@ -86,12 +89,14 @@ namespace Breadr.Controllers
                 return BadRequest(response.Message);
             }
 
-            return Ok(response.User); //Return JSON with user data
-        }*/
+            return Ok(response.User); 
+        }
+        */
 
         //REGISTRATION
 
-        /*[HttpPost("RegisterUser")]
+        /*
+        [HttpPost("RegisterUser")]
         public async Task<IActionResult> RegisterUser([FromBody] JsonArray payload)
         {
 
@@ -104,15 +109,18 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Status);
-        }*/
+        }
+
+        */
 
         //MQTT
 
-        /*[HttpGet("KeepAlive/{gateId}")]
-        public async Task<IActionResult> KeepAlive(FromRoute]int gateId)
+        /*
+        [HttpGet("KeepAlive/{gateId}")]
+        public async Task<IActionResult> KeepAlive([FromRoute]int gateId)
         {
 
-            KeepAliveRequest request = CreateServiceRequest<KeepAliveRequest>(gateId);
+            KeepAlive request = CreateServiceRequest<KeepAlive>(gateId);
             KeepAliveResponse response = await _reportService.KeepAlive(request);
 
             if (!response.Success)
@@ -121,11 +129,12 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Status); //return success or failure 
-        }*/
+        }
+        */
 
         //GATE OPERATION
 
-        /*[HttpGet("GetAllGates")]
+        [HttpGet("GetAllGates")]
         public async Task<IActionResult> GetAllGates()
         {
 
@@ -138,9 +147,9 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.AllGates);
-        }*/
+        }
 
-        /*[HttpGet("GetAllActiveGates")]
+        [HttpGet("GetAllActiveGates")]
         public async Task<IActionResult> GetAllActiveGates()
         {
 
@@ -153,9 +162,9 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.AllActiveGates);
-        }*/
+        }
 
-        /*[HttpGet("GetAllInactiveGates")]
+        [HttpGet("GetAllInactiveGates")]
         public async Task<IActionResult> GetAllInactiveGates()
         {
 
@@ -168,9 +177,10 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.AllInactiveGates);
-        }*/
+        }
 
-        /*[HttpPost("AddNewGate")]
+        /*
+        [HttpPost("AddNewGate")]
         public async Task<IActionResult> AddNewGate([FromBody] JsonArray payload) //JSON ARRAY???
         {
 
@@ -183,9 +193,11 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Status); 
-        }*/
+        }
+        */
 
-        /*[HttpPut("EditGate/{gateId}")]
+        /*
+        [HttpPut("EditGate/{gateId}")]
         public async Task<IActionResult> EditGate([FromBody] JsonArray payload, [FromRoute]string gateId) //JSON ARRAY???
         {
 
@@ -198,9 +210,11 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Status);
-        }*/
+        }
+        */
 
-        /*[HttpPatch("DisableGate/{gateId}")]
+        /*
+        [HttpPatch("DisableGate/{gateId}")]
         public async Task<IActionResult> DisableGate([FromBody] JsonArray payload, [FromRoute] string gateId) //JSON ARRAY???
         {
 
@@ -213,9 +227,11 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Status);
-        }*/
+        }
+        */
 
-        /*[HttpPatch("EnableGate/{gateId}")]
+        /*
+        [HttpPatch("EnableGate/{gateId}")]
         public async Task<IActionResult> EnableGate([FromBody] JsonArray payload, [FromRoute] string gateId) //JSON ARRAY???
         {
 
@@ -228,7 +244,8 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Status);
-        }*/
+        }
+        */
 
         //STATISTICS
 
