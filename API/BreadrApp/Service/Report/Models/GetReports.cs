@@ -8,13 +8,13 @@ using Service.Report.Dtos;
 
 namespace Service.Report.Models
 {
-    public class GetAllReportsRequest: RequestBase
+    public class GetReportsRequest: RequestBase
     {
-
+        public int UserId { get; set; }
     }
 
-    public class GetAllReportsResponse : ResponseBase<GetAllReportsRequest>
+    public class GetReportsResponse : ResponseBase<GetReportsRequest>
     {
-        public List<ReportDto> AllReports { get; set; }
+        public List<ReportDto> Reports { get; set; }
     }
 }

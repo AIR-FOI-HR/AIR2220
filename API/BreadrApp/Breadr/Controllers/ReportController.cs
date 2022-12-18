@@ -30,23 +30,24 @@ namespace Breadr.Controllers
         public async Task<IActionResult> GetAllReports()
         {
 
-            GetAllReportsRequest request = CreateServiceRequest<GetAllReportsRequest>();
-            GetAllReportsResponse response = await _reportService.GetAllReports(request);
+            GetReportsRequest request = CreateServiceRequest<GetReportsRequest>();
+            GetReportsResponse response = await _reportService.GetAllReports(request);
  
             if (!response.Success)
             {
                 return BadRequest(response.Message);
             }
 
-            return Ok(response.AllReports);
+            return Ok(response.Reports);
         }
-        /*
+        
         [HttpGet("ReportsByUser/{userId}")]
         public async Task<IActionResult> GetReportsByUser([FromRoute]int userId)
         {
 
-            GetReportsByUserRequest request = CreateServiceRequest<GetReportsByUserRequest>(userId);
-            GetReportsByUserResponse response = await _reportService.GetReportsByUser(request);
+            GetReportsRequest request = CreateServiceRequest<GetReportsRequest>();
+            request.UserId=userId;
+            GetReportsResponse response = await _reportService.GetReportsByUser(request);
 
             if (!response.Success)
             {
@@ -55,7 +56,7 @@ namespace Breadr.Controllers
 
             return Ok(response.Reports);
         }
-        */
+        
 
         //LOGIN
 
@@ -134,7 +135,7 @@ namespace Breadr.Controllers
 
         //GATE OPERATION
 
-        [HttpGet("GetAllGates")]
+        /*[HttpGet("GetAllGates")]
         public async Task<IActionResult> GetAllGates()
         {
 
@@ -147,9 +148,9 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.AllGates);
-        }
+        }*/
 
-        [HttpGet("GetAllActiveGates")]
+        /*[HttpGet("GetAllActiveGates")]
         public async Task<IActionResult> GetAllActiveGates()
         {
 
@@ -177,7 +178,7 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.AllInactiveGates);
-        }
+        }*/
 
         /*
         [HttpPost("AddNewGate")]

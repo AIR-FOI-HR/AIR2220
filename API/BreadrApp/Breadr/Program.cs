@@ -1,3 +1,4 @@
+using Breadr.Service.Gate;
 using DataAccess.DBContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace Breadr
                     builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
             builder.Services.AddScoped<IReportService, ReportService>();
+            builder.Services.AddScoped<IGateService, GateService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
