@@ -2,6 +2,7 @@
 using Breadr.Core.Web;
 using Breadr.Service.Gate;
 using Breadr.Service.Gate.Models;
+using Breadr.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Service.Report;
@@ -71,11 +72,11 @@ namespace Breadr.Controllers
         }
 
         
-        [HttpPost("AddNewGate")]
-        public async Task<IActionResult> AddNewGate([FromBody] JsonArray payload) //JSON ARRAY???
+        [HttpPost("Gate")]
+        public async Task<IActionResult> AddNewGate([FromBody] GateViewModel gate) //JSON ARRAY???
         {
 
-            GateRequest request = CreateServiceRequest<GateRequest>();
+            GateRequest request = _mapper.Map(gate,CreateServiceRequest<GateRequest>());
             GateResponse response = await _gateService.AddNewGate(request);
 
             if (!response.Success)
@@ -88,11 +89,11 @@ namespace Breadr.Controllers
         
 
         
-        [HttpPut("EditGate/{gateId}")]
-        public async Task<IActionResult> EditGate([FromBody] JsonArray payload, [FromRoute]string gateId) //JSON ARRAY???
+        [HttpPut("Gate")]
+        public async Task<IActionResult> EditGate([FromBody] GateViewModel gate) //JSON ARRAY???
         {
 
-            GateRequest request = CreateServiceRequest<GateRequest>();
+            GateRequest request = _mapper.Map(gate,CreateServiceRequest<GateRequest>());
             GateResponse response = await _gateService.EditGate(request);
 
             if (!response.Success)
@@ -106,10 +107,11 @@ namespace Breadr.Controllers
 
         
         [HttpPatch("DisableGate/{gateId}")]
-        public async Task<IActionResult> DisableGate([FromBody] JsonArray payload, [FromRoute] string gateId) //JSON ARRAY???
+        public async Task<IActionResult> DisableGate([FromRoute] string gateId) //JSON ARRAY???
         {
 
             GateRequest request = CreateServiceRequest<GateRequest>();
+            request.GateId = gateId;
             GateResponse response = await _gateService.DisableGate(request);
 
             if (!response.Success)
@@ -123,7 +125,7 @@ namespace Breadr.Controllers
 
         
         [HttpPatch("EnableGate/{gateId}")]
-        public async Task<IActionResult> EnableGate(int gateId) //JSON ARRAY???
+        public async Task<IActionResult> EnableGate(string gateId) //JSON ARRAY???
         {
 
             GateRequest request = CreateServiceRequest<GateRequest>();

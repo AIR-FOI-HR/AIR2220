@@ -3,6 +3,7 @@ using DataAccess.DBContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Service.Report;
+using Breadr.Service.Statistic;
 
 namespace Breadr
 {
@@ -24,6 +25,7 @@ namespace Breadr
                 ));
             builder.Services.AddScoped<IReportService, ReportService>();
             builder.Services.AddScoped<IGateService, GateService>();
+            builder.Services.AddScoped<IStatisticService, StatisticService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

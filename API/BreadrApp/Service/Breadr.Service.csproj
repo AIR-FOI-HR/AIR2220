@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
@@ -19,10 +20,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Breadr.Core\Breadr.Core.csproj" />
     <ProjectReference Include="..\DataAccess\Breadr.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Statistic\" />
   </ItemGroup>
 
 </Project>
