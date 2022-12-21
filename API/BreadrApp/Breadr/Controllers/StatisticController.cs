@@ -10,7 +10,8 @@ using Service.Report.Models;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Web.Helpers;
-using Breadr.Service.Statistic;
+using Service.Statistic;
+using Breadr.Service.Statistic.Models;
 
 namespace Breadr.Controllers
 {
@@ -27,12 +28,66 @@ namespace Breadr.Controllers
             _mapper = mapper;
         }
 
-        
-        //TODO dodaj endpointe za statistiku
+        [HttpGet("GetStatistics")]
+        public async Task<IActionResult> GetStatistics()
+        {
 
-        //prvi i zadnja dva sa cofluensa su modeli Statistics
+            StatisticsRequest request = CreateServiceRequest<StatisticsRequest>();
+            StatisticsResponse response = await _statisticService.GetStatistics(request);
 
-        //2.,3. i 4. su svaki zasebno, dodani su u modelima
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
 
+            return Ok(response.Statistics);
+        }
+
+        [HttpGet("GetSuccessfulPaymentStatistics")]
+        public async Task<IActionResult> GetSuccessfulPaymentStatistics()
+        {
+
+            StatisticsRequest request = CreateServiceRequest<StatisticsRequest>();
+            StatisticsResponse response = await _statisticService.GetSuccessfulPaymentStatistics(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.Statistics);
+        }
+
+        [HttpGet("GetUnsuccessfulPaymentStatistics")]
+        public async Task<IActionResult> GetUnsuccessfulPaymentStatistics()
+        {
+
+            StatisticsRequest request = CreateServiceRequest<StatisticsRequest>();
+            StatisticsResponse response = await _statisticService.GetUnsuccessfulPaymentStatistics(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.Statistics);
+        }
+
+
+        [HttpGet("GetStatisticsByTime/{time}")]
+        public async Task<IActionResult> GetStatisticsByTime([FromRoute] int time)
+        {
+
+            StatisticsByTimeRequest request = CreateServiceRequest<StatisticsByTimeRequest>();
+            request.Time = time;
+            StatisticsByTimeResponse response = await _statisticService.GetStatisticsByTime(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.Statistics);
+        }
     }
 }

@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Breadr.Service.Statistic.Models
 {
-    public class StatisticsByWeeksRequest : RequestBase
+    public class StatisticsByTimeRequest : RequestBase
     {
-        public int NumberOfWeeks { get; set; }
+        public int Time { get; set; }
 
     }
-    public class StatisticsByWeeksResponse : ResponseBase<StatisticsByWeeksRequest>
+    public class StatisticsByTimeResponse : ResponseBase<StatisticsByTimeRequest>
     {
         public List<StatisticDto> Statistics { get; set; }
     }
