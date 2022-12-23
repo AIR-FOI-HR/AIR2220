@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Service.Report;
 using Breadr.Service.Statistic;
+using Service.Statistic;
 
 namespace Breadr
 {
