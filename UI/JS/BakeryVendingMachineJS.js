@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    console.log("JS is connected.");
+    console.log("JavaScript is connected.");
     
     if(!checkSignInCookie()){
         var path = window.location.pathname;
@@ -10,6 +10,7 @@ $(document).ready(function(){
     }
 
     $("#error").hide();
+    $("#error-CU").hide();
 
     $("#btnSignIn").click(function(e){
         e.preventDefault();
@@ -81,6 +82,132 @@ $(document).ready(function(){
             return false;
         }
     }
+
+    $("#new-gate-btn").click(function(e){
+        console.log("Radi");
+    });
+
+
+    if($("#table-gates").length > 0){
+        loadGates();
+    }
+    
+    function loadGates(){
+        $("#table-gates").empty();
+        //mock data: {"a":{"gate_id":"TG_001", "product_name": "Baguette", "quantity": 10, "lat": 46.309436, "lon": 16.329482, "price": 1.50, "keepalive_time":"2022-12-28 11:44:56", "active": 1}, "b":{"gate_id":"TG_002", "product_name": "Croissant", "quantity": 15, "lat": 45.309436, "lon": 15.329482, "price": 1.25, "keepalive_time":"2022-12-28 11:45:26", "active": 0}, "c":{"gate_id":"TG_003", "product_name": "Muffin", "quantity": 7, "lat": 47.309436, "lon": 17.329482, "price": 2.00, "keepalive_time":"2022-12-28 11:45:45", "active": 1}}
+        var URL = "https://mocki.io/v1/fb1a7cc9-ee4c-4d69-a4e7-90f18eb14c97";
+
+        $.ajax({type: "GET", url: URL, dataType: "json", complete: function(data){
+            var gates = $.parseJSON(data.responseText);
+            var table = '<table class="table table-striped table-hover">'+
+            '<thead>'+
+              '<tr>'+
+                '<th scope="col">Gate name</th>'+
+                '<th scope="col">Product name</th>'+
+                '<th scope="col">Quantity</th>'+
+                '<th scope="col">Price(€)</th>'+
+                '<th scope="col">Sales today</th>'+
+                '<th scope="col">% of yesterday</th>'+
+                '<th scope="col">Last online</th>'+
+                '<th scope="col">Edit gate</th>'+
+                '<th scope="col">(De)Activate gate</th>'+
+              '</tr>'+
+            '</thead>'+
+            '<tbody>';
+
+            for(g in gates){
+                if(gates[g].active ===  1)
+                    var btn_text = "Deactivate";
+                else
+                    var btn_text = "Activate";
+
+                table += '<tr>'+
+                '<th scope="row">'+gates[g].gate_id+'</th>'+
+                '<td>'+gates[g].product_name+'</td>'+
+                '<td>'+gates[g].quantity+'</td>'+
+                '<td>'+gates[g].price+'</td>'+
+                '<td>10</td>'+
+                '<td>87,3</td>'+
+                '<td>'+Math.floor((Date.now() - new Date(gates[g].keepalive_time))/60000)+' min</td>'+
+                '<td><a href="./gatesCU.html?'+gates[g].gate_id+'">Edit</a></td>'+
+                '<td><a href="#" id="btn-act-deact">'+btn_text+'</a></td>'+
+              '</tr>';
+            }
+
+            table += '</tbody></table>';
+            $("#table-gates").append(table);
+        }});
+    }
+
+    $("#new-gate-btn").click(function(e){
+        window.location.replace("./gatesCU.html");
+    });
+
+    if($("#CU-section").length > 0){
+        gateCU();
+    }
+
+    function gateCU(){
+        var path = window.location.href;
+        var action = path.split("/").pop().split("?")[1];
+        if(action){
+            $("#page-name-CU").empty();
+            $("#page-name-CU").append("Edit gate");
+            var URL = "https://mocki.io/v1/7520ad1c-9b04-4f1a-80d0-60a74363f669";
+            $.ajax({type: "GET", url: URL, data: {gate_id: action}, dataType: "json", complete: function(data){
+                var gate = $.parseJSON(data.responseText);
+                $("#productName").val(gate["product_name"]);
+                $("#quantity").val(gate["quantity"]);
+                $("#price").val(gate["price"]);
+                $("#lon").val(gate["lon"]);
+                $("#lat").val(gate["lat"]);
+            }});
+        }else{
+            $("#page-name-CU").empty();
+            $("#page-name-CU").append("Create new gate");
+            $("#productName").val();
+            $("#quantity").val();
+            $("#price").val();
+            $("#lon").val();
+            $("#lat").val();
+        }
+    }
+
+    $("#btn-cancel").click(function(e){
+        e.preventDefault();
+
+        $("#productName").val();
+        $("#quantity").val();
+        $("#price").val();
+        $("#lon").val();
+        $("#lat").val();
+
+        window.location.replace("./gates.html");
+    });
+
+    $("#btn-save").click(function(e){
+        e.preventDefault();
+        //URL for adding new gate or editing existing one; ID, keepalive and active status is sorted by API
+        if($("#productName").val() != "" && $("#quantity").val() != "" && $("#price").val() != "" && $("#lon").val() != "" && $("#lat").val() != ""){
+            $("#error-CU").hide();
+            var path = window.location.href;
+            var action = path.split("/").pop().split("?")[1];
+            if(action)
+                var URL = ""; //URL for edit gate
+            else
+                var URL = ""; // URL for creating inew gate
+    
+            $.ajax({type: "POST", url: URL, data: {product_name: $("#productName").val(), quantity: $("#quantity").val(), latitude: $("#lat").val(), longitude: $("#lon").val(), price: $("#price").val()}, dataType: "json", complete: function(data){
+            }});
+    
+            window.location.replace("./gates.html");
+        }
+        else{
+            $("#error-CU").show();
+            $("#error-CU").append("<span>Some fields are empty!</span>");
+        }
+        
+    });
 });
 
 function initMap() {

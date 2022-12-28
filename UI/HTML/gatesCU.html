@@ -54,9 +54,10 @@
         </div>
 
         <div id="content">
-          <h1>Edit gate</h1>
+          <h1 id="page-name-CU"></h1>
           <br>
           <div id="CU-section">
+            <div id="error-CU" class="alert alert-danger"></div>
             <form>
               <div class="form-group">
                 <label for="productName">Product name</label>
@@ -80,8 +81,8 @@
               </div>
 
               <div class="form-group text-right">
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="cancel" class="btn btn-secondary">Cancel</button>
+                <button type="submit" class="btn btn-primary" id="btn-save">Save</button>
+                <button type="cancel" class="btn btn-secondary" id="btn-cancel">Cancel</button>
               </div>
             </form>
           </div>

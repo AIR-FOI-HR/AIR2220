@@ -144,3 +144,9 @@ a.nav-link:hover{
     margin-left: auto;
     margin-right: auto;
 }
+
+#new-gate-btn{
+    position: absolute;
+    right: 30px;
+    top: 40px;
+}
