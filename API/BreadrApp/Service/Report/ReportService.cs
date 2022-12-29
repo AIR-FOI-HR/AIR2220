@@ -66,20 +66,12 @@ namespace Service.Report
             return response;
         }        
 
-        public Task<GetSaltByEmailResponse> GetSaltByEmail(GetSaltByEmailRequest request)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<KeepAliveResponse> KeepAlive(KeepAliveRequest request)
         {
             throw new NotImplementedException();
         }
 
-        public Task<LoginUserResponse> LoginUser(LoginUserRequest request)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<RegisterUserResponse> RegisterUser(RegisterUserRequest request)
         {

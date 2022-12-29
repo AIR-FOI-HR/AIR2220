@@ -12,8 +12,6 @@ namespace Service.Report
     {
         Task<GetReportsResponse> GetAllReports(GetReportsRequest request);
         Task<GetReportsResponse> GetReportsByUser(GetReportsRequest request);
-        Task<GetSaltByEmailResponse> GetSaltByEmail(GetSaltByEmailRequest request);
-        Task<LoginUserResponse> LoginUser(LoginUserRequest request);
         Task<RegisterUserResponse> RegisterUser(RegisterUserRequest request);
         Task<KeepAliveResponse> KeepAlive(KeepAliveRequest request);
 
