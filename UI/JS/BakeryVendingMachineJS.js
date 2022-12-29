@@ -11,6 +11,7 @@ $(document).ready(function(){
 
     $("#error").hide();
     $("#error-CU").hide();
+    $("#action-info").hide();
 
     $("#btnSignIn").click(function(e){
         e.preventDefault();
@@ -83,18 +84,56 @@ $(document).ready(function(){
         }
     }
 
-    $("#new-gate-btn").click(function(e){
-        console.log("Radi");
-    });
-
-
     if($("#table-gates").length > 0){
-        loadGates();
+        var path = window.location.href;
+        var attributes = path.split("/").pop().split("?");
+        if(attributes[1]){
+            $("#action-info").empty();
+
+            var gateData = attributes[1].split('&');
+            var gateId = gateData[0].split('=')[1];
+            var action = gateData[1].split('=')[1];
+
+            if(action === "1"){
+                //URL for disabling the gate
+                var URL = "https://mocki.io/v1/98c398aa-3422-469d-b485-55c1cc7ac0db";
+                //type is PATCH
+                $.ajax({type: "GET", url: URL, data: {gate_id: gateId}, dataType: "json", complete: function(data){
+                    var msg = $.parseJSON(data.responseText);
+                    if(msg["action"] === "success"){
+                        $("#action-info").append("<span>Gate is successfully deactivated!</span>");
+                    }
+                    else{
+                        $("#action-info").append("<span>An error occurred!</span>");
+                    }
+                }});
+            }
+            else{
+                //URL for enabling the gate
+                var URL = "https://mocki.io/v1/98c398aa-3422-469d-b485-55c1cc7ac0db";
+                //type is PATCH
+                $.ajax({type: "GET", url: URL, data: {gate_id: gateId}, dataType: "json", complete: function(data){
+                    var msg = $.parseJSON(data.responseText);
+                    if(msg["action"] === "success"){
+                        $("#action-info").append("<span>Gate is successfully activated!</span>");
+                    }
+                    else{
+                        $("#action-info").append("<span>An error occurred!</span>");
+                    }
+                }});
+            }
+            $("#action-info").show();
+            loadGates();
+        }
+        else{
+            loadGates();
+        }
     }
     
     function loadGates(){
         $("#table-gates").empty();
-        //mock data: {"a":{"gate_id":"TG_001", "product_name": "Baguette", "quantity": 10, "lat": 46.309436, "lon": 16.329482, "price": 1.50, "keepalive_time":"2022-12-28 11:44:56", "active": 1}, "b":{"gate_id":"TG_002", "product_name": "Croissant", "quantity": 15, "lat": 45.309436, "lon": 15.329482, "price": 1.25, "keepalive_time":"2022-12-28 11:45:26", "active": 0}, "c":{"gate_id":"TG_003", "product_name": "Muffin", "quantity": 7, "lat": 47.309436, "lon": 17.329482, "price": 2.00, "keepalive_time":"2022-12-28 11:45:45", "active": 1}}
+        //mock data: {"a":{"gate_id":"TG_001", "product_name": "Baguette", "quantity": 10, "lat": 46.309436, "lon": 16.329482, "price": 1.50, "keepalive_time":"2022-12-28 11:44:56", "active": 1, "todays_sales": 15, "yesterdays_sales": 23}, "b":{"gate_id":"TG_002", "product_name": "Croissant", "quantity": 15, "lat": 45.309436, "lon": 15.329482, "price": 1.25, "keepalive_time":"2022-12-28 11:45:26", "active": 0, "todays_sales": 29, "yesterdays_sales": 28}, "c":{"gate_id":"TG_003", "product_name": "Muffin", "quantity": 7, "lat": 47.309436, "lon": 17.329482, "price": 2.00, "keepalive_time":"2022-12-28 11:45:45", "active": 1, "todays_sales": 7, "yesterdays_sales": 10}}
+
         var URL = "https://mocki.io/v1/18629954-0762-4f63-9013-bcca3a78f10e";
 
         $.ajax({type: "GET", url: URL, dataType: "json", complete: function(data){
@@ -130,10 +169,9 @@ $(document).ready(function(){
                 '<td>'+Math.round(((gates[g].todays_sales/gates[g].yesterdays_sales)*100)*100)/100+'</td>'+
                 '<td>'+Math.floor((Date.now() - new Date(gates[g].keepalive_time))/60000)+' min</td>'+
                 '<td><a href="./gatesCU.html?'+gates[g].gate_id+'">Edit</a></td>'+
-                '<td><a href="#" id="btn-act-deact">'+btn_text+'</a></td>'+
-              '</tr>';
+                '<td><a href="./gates.html?gateId='+gates[g].gate_id+'&action='+gates[g].active+'"">'+btn_text+'</a></td>'+
+                '</tr>';
             }
-
             table += '</tbody></table>';
             $("#table-gates").append(table);
         }});
