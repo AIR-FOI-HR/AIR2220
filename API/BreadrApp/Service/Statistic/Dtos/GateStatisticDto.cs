@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Breadr.Service.Statistic.Dtos
 {
-    public class StatisticDto
+    public class GateStatisticDto
     {
-        public int SelledProductsStatistics { get; set; }
+        public int TodaysStats { get; set; }
+        public int YesterdaysStats { get; set; }
     }
 }

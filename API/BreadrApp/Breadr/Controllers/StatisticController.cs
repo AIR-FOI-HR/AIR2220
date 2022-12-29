@@ -10,8 +10,8 @@ using Service.Report.Models;
 using System.Text.Json.Nodes;
 using System.Threading.Tasks;
 using System.Web.Helpers;
-using Service.Statistic;
 using Breadr.Service.Statistic.Models;
+using Service.Statistic;
 
 namespace Breadr.Controllers
 {
@@ -74,20 +74,68 @@ namespace Breadr.Controllers
         }
 
 
-        [HttpGet("GetStatisticsByTime/{time}")]
-        public async Task<IActionResult> GetStatisticsByTime([FromRoute] int time)
+        [HttpGet("GetStatisticsByTime/{hour}")]
+        public async Task<IActionResult> GetStatisticsByHour([FromRoute] int time)
         {
 
             StatisticsByTimeRequest request = CreateServiceRequest<StatisticsByTimeRequest>();
             request.Time = time;
-            StatisticsByTimeResponse response = await _statisticService.GetStatisticsByTime(request);
+            StatisticsByTimeResponse response = await _statisticService.GetStatisticsByHour(request);
 
             if (!response.Success)
             {
                 return BadRequest(response.Message);
             }
 
-            return Ok(response.Statistics);
+            return Ok(response.SelledProductsStatistics);
+        }
+
+        [HttpGet("GetStatisticsByTime/{day}")]
+        public async Task<IActionResult> GetStatisticsByDay([FromRoute] int time)
+        {
+
+            StatisticsByTimeRequest request = CreateServiceRequest<StatisticsByTimeRequest>();
+            request.Time = time;
+            StatisticsByTimeResponse response = await _statisticService.GetStatisticsByDay(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.SelledProductsStatistics);
+        }
+
+        [HttpGet("GetStatisticsByTime/{week}")]
+        public async Task<IActionResult> GetStatisticsByWeek([FromRoute] int time)
+        {
+
+            StatisticsByTimeRequest request = CreateServiceRequest<StatisticsByTimeRequest>();
+            request.Time = time;
+            StatisticsByTimeResponse response = await _statisticService.GetStatisticsByWeek(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.SelledProductsStatistics);
+        }
+        
+        [HttpGet("GetStatisticsOfGate/{GateId}")]
+        public async Task<IActionResult> GetStatisticsOfGate([FromRoute] string gateId)
+        {
+
+            StatisticsOfGateRequest request = CreateServiceRequest<StatisticsOfGateRequest>();
+            request.GateId = gateId;
+            StatisticsOfGateResponse response = await _statisticService.GetStatisticsOfGate(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.GateStatistic);
         }
     }
 }

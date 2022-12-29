@@ -15,6 +15,6 @@ namespace Breadr.Service.Statistic.Models
     }
     public class StatisticsResponse : ResponseBase<StatisticsRequest>
     {
-        public List<StatisticDto> Statistics { get; set; }
+        public StatisticDto Statistics { get; set; }
     }
 }
