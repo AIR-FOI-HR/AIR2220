@@ -95,7 +95,7 @@ $(document).ready(function(){
     function loadGates(){
         $("#table-gates").empty();
         //mock data: {"a":{"gate_id":"TG_001", "product_name": "Baguette", "quantity": 10, "lat": 46.309436, "lon": 16.329482, "price": 1.50, "keepalive_time":"2022-12-28 11:44:56", "active": 1}, "b":{"gate_id":"TG_002", "product_name": "Croissant", "quantity": 15, "lat": 45.309436, "lon": 15.329482, "price": 1.25, "keepalive_time":"2022-12-28 11:45:26", "active": 0}, "c":{"gate_id":"TG_003", "product_name": "Muffin", "quantity": 7, "lat": 47.309436, "lon": 17.329482, "price": 2.00, "keepalive_time":"2022-12-28 11:45:45", "active": 1}}
-        var URL = "https://mocki.io/v1/fb1a7cc9-ee4c-4d69-a4e7-90f18eb14c97";
+        var URL = "https://mocki.io/v1/18629954-0762-4f63-9013-bcca3a78f10e";
 
         $.ajax({type: "GET", url: URL, dataType: "json", complete: function(data){
             var gates = $.parseJSON(data.responseText);
@@ -126,8 +126,8 @@ $(document).ready(function(){
                 '<td>'+gates[g].product_name+'</td>'+
                 '<td>'+gates[g].quantity+'</td>'+
                 '<td>'+gates[g].price+'</td>'+
-                '<td>10</td>'+
-                '<td>87,3</td>'+
+                '<td>'+gates[g].todays_sales+'</td>'+
+                '<td>'+Math.round(((gates[g].todays_sales/gates[g].yesterdays_sales)*100)*100)/100+'</td>'+
                 '<td>'+Math.floor((Date.now() - new Date(gates[g].keepalive_time))/60000)+' min</td>'+
                 '<td><a href="./gatesCU.html?'+gates[g].gate_id+'">Edit</a></td>'+
                 '<td><a href="#" id="btn-act-deact">'+btn_text+'</a></td>'+
