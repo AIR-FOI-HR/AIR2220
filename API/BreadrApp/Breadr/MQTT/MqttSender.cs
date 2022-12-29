@@ -6,7 +6,7 @@ namespace Breadr.MQTT
     public static class MqttSender
     {
         
-        public static async Task MqttSend(int gateId,string operation)
+        public static async Task MqttSend(string gateId,string operation)
         {
   
             var mqttFactory = new MqttFactory();
@@ -20,7 +20,7 @@ namespace Breadr.MQTT
 
             await client.ConnectAsync(options);
 
-            string payload= "{\"gate\":\"" + gateId.ToString() + "\",\"operation\": \"" + operation + "\"}";
+            string payload= "{\"gate\":\"" + gateId + "\",\"operation\": \"" + operation + "\"}";
 
             var message = new MqttApplicationMessageBuilder()
             .WithTopic("foi/air2220")
