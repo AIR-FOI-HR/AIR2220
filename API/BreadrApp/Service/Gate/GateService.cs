@@ -219,6 +219,29 @@ namespace Breadr.Service.Gate
             return response;
         }
 
+        public async Task<GateResponse> GetGate(GateRequest request)
+        {
+            GateResponse response = new GateResponse()
+            {
+                Request = request
+            };
 
+            GateDto gateDto = await _context.Gates.Where(x => x.GateId.Equals(request.GateId))
+                .Select(x => new GateDto
+                {
+                    GateId = x.GateId,
+                    Active = x.Active,
+                    Keepalive = x.Keepalive,
+                    Latitude = x.Latitude,
+                    Longitude=x.Longitude,
+                    Price = x.Price,
+                    ProductName = x.ProductName,
+                    Quantity=x.Quantity
+                }).FirstOrDefaultAsync();
+
+            response.Gate = gateDto;
+            response.Success = true;
+            return response;
+        }
     }
 }

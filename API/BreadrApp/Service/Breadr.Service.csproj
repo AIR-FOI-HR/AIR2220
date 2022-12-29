@@ -22,4 +22,8 @@
     <ProjectReference Include="..\DataAccess\Breadr.DataAccess.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ProfileManager\NewFolder\" />
+  </ItemGroup>
+
 </Project>

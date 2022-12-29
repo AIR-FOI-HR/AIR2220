@@ -20,9 +20,9 @@ namespace Breadr.Controllers
         private readonly IGateService _gateService;
         private readonly IMapper _mapper;
 
-        public GateController(IGateService reportService, IMapper mapper)
+        public GateController(IGateService gateService, IMapper mapper)
         {
-            _gateService = reportService;
+            _gateService = gateService;
             _mapper = mapper;
         }
         
@@ -39,6 +39,22 @@ namespace Breadr.Controllers
             }
 
             return Ok(response.Gates);
+        }
+
+        [HttpGet("Gate/{gateId}")]
+        public async Task<IActionResult> GetGate(string gateId)
+        {
+
+            GateRequest request = CreateServiceRequest<GateRequest>();
+            request.GateId = gateId;
+            GateResponse response = await _gateService.GetGate(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.Gate);
         }
 
         [HttpGet("AllActiveGates")]

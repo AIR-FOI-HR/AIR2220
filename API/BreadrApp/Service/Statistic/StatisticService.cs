@@ -31,7 +31,7 @@ namespace Service.Statistic
 
             StatisticDto statisticDto = new StatisticDto();
             statisticDto.SelledProductsStatistics = await _context.Logs.Where
-                (x => x.Action.Equals("Purchase made") && x.Action.Equals("Purchase declined")).CountAsync();
+                (x => x.Action.Equals("purchase made") && x.Action.Equals("purchase declined")).CountAsync();
 
             response.Statistics = statisticDto;
             response.Success = true;
@@ -49,7 +49,7 @@ namespace Service.Statistic
             };
 
             StatisticDto statisticDto = new StatisticDto();
-            statisticDto.SelledProductsStatistics = await _context.Logs.Where(x => x.Action.Equals("Purchase made")
+            statisticDto.SelledProductsStatistics = await _context.Logs.Where(x => x.Action.Equals("purchase made")
             && x.DateTime == DateTime.Now.AddDays(-request.Time)).CountAsync();
 
             response.SelledProductsStatistics = statisticDto;
@@ -67,7 +67,7 @@ namespace Service.Statistic
             };
 
             StatisticDto statisticDto = new StatisticDto();
-            statisticDto.SelledProductsStatistics = await _context.Logs.Where(x => x.Action.Equals("Purchase made")
+            statisticDto.SelledProductsStatistics = await _context.Logs.Where(x => x.Action.Equals("purchase made")
             && x.DateTime == DateTime.Now.AddHours(-request.Time)).CountAsync();
 
             response.SelledProductsStatistics = statisticDto;
@@ -84,7 +84,7 @@ namespace Service.Statistic
             };
 
             StatisticDto statisticDto = new StatisticDto();
-            statisticDto.SelledProductsStatistics = await _context.Logs.Where(x => x.Action.Equals("Purchase made")
+            statisticDto.SelledProductsStatistics = await _context.Logs.Where(x => x.Action.Equals("purchase made")
             && x.DateTime == DateTime.Now.AddHours(-request.Time*168)).CountAsync();
 
             response.SelledProductsStatistics = statisticDto;
@@ -102,10 +102,10 @@ namespace Service.Statistic
 
             GateStatisticDto gateStatistic = new();
             gateStatistic.TodaysStats = await _context.Logs.Where(x => x.GateId.Equals(request.GateId)
-            && x.DateTime == DateTime.Today && x.Action.Equals("Purchase made")).CountAsync();
+            && x.DateTime == DateTime.Today && x.Action.Equals("purchase made")).CountAsync();
 
             gateStatistic.YesterdaysStats = await _context.Logs.Where(x => x.GateId.Equals(request.GateId)
-            && x.DateTime == DateTime.Today.AddDays(-1) && x.Action.Equals("Purchase made")).CountAsync();
+            && x.DateTime == DateTime.Today.AddDays(-1) && x.Action.Equals("purchase made")).CountAsync();
 
             response.GateStatistic = gateStatistic;
             response.Success = true;
@@ -122,7 +122,7 @@ namespace Service.Statistic
 
             StatisticDto statisticDto = new StatisticDto();
             statisticDto.SelledProductsStatistics = await _context.Logs.Where
-                (x => x.Action.Equals("Purchase made")).CountAsync();
+                (x => x.Action.Equals("purchase made")).CountAsync();
 
             response.Statistics = statisticDto;
             response.Success = true;
@@ -139,7 +139,7 @@ namespace Service.Statistic
 
             StatisticDto statisticDto = new StatisticDto();
             statisticDto.SelledProductsStatistics = await _context.Logs.Where
-                (x => x.Action.Equals("Purchase declined")).CountAsync();
+                (x => x.Action.Equals("purchase declined")).CountAsync();
 
             response.Statistics = statisticDto;
             response.Success = true;

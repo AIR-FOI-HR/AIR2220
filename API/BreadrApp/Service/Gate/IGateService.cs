@@ -10,6 +10,7 @@ namespace Breadr.Service.Gate
     public interface IGateService
     {
         Task<GatesResponse> GetAllGates(GatesRequest request);
+        Task<GateResponse> GetGate(GateRequest request);
         Task<GatesResponse> GetAllActiveGates(GatesRequest request);
         Task<GatesResponse> GetAllInactiveGates(GatesRequest request);
         Task<GateResponse> AddNewGate(GateRequest request);

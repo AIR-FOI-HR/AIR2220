@@ -1,4 +1,5 @@
 using Breadr.Service.Gate;
+using Breadr.Service.ProfileManager;
 using DataAccess.DBContext;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace Breadr
             builder.Services.AddScoped<IReportService, ReportService>();
             builder.Services.AddScoped<IGateService, GateService>();
             builder.Services.AddScoped<IStatisticService, StatisticService>();
+            builder.Services.AddScoped<IProfileManagerService, ProfileManagerService>();
 
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

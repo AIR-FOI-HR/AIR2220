@@ -28,7 +28,7 @@ namespace Breadr.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetStatistics")]
+        [HttpGet("Statistics")]
         public async Task<IActionResult> GetStatistics()
         {
 
@@ -43,7 +43,7 @@ namespace Breadr.Controllers
             return Ok(response.Statistics);
         }
 
-        [HttpGet("GetSuccessfulPaymentStatistics")]
+        [HttpGet("SuccessfulPaymentStatistics")]
         public async Task<IActionResult> GetSuccessfulPaymentStatistics()
         {
 
@@ -58,7 +58,7 @@ namespace Breadr.Controllers
             return Ok(response.Statistics);
         }
 
-        [HttpGet("GetUnsuccessfulPaymentStatistics")]
+        [HttpGet("UnsuccessfulPaymentStatistics")]
         public async Task<IActionResult> GetUnsuccessfulPaymentStatistics()
         {
 
@@ -74,7 +74,7 @@ namespace Breadr.Controllers
         }
 
 
-        [HttpGet("GetStatisticsByTime/{hour}")]
+        [HttpGet("StatisticsByTime/{hour}")]
         public async Task<IActionResult> GetStatisticsByHour([FromRoute] int time)
         {
 
@@ -90,7 +90,7 @@ namespace Breadr.Controllers
             return Ok(response.SelledProductsStatistics);
         }
 
-        [HttpGet("GetStatisticsByTime/{day}")]
+        [HttpGet("StatisticsByTime/{day}")]
         public async Task<IActionResult> GetStatisticsByDay([FromRoute] int time)
         {
 
@@ -106,7 +106,7 @@ namespace Breadr.Controllers
             return Ok(response.SelledProductsStatistics);
         }
 
-        [HttpGet("GetStatisticsByTime/{week}")]
+        [HttpGet("StatisticsByTime/{week}")]
         public async Task<IActionResult> GetStatisticsByWeek([FromRoute] int time)
         {
 
@@ -122,7 +122,7 @@ namespace Breadr.Controllers
             return Ok(response.SelledProductsStatistics);
         }
         
-        [HttpGet("GetStatisticsOfGate/{GateId}")]
+        [HttpGet("StatisticsOfGate/{GateId}")]
         public async Task<IActionResult> GetStatisticsOfGate([FromRoute] string gateId)
         {
 
