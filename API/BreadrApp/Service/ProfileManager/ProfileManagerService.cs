@@ -33,7 +33,7 @@ namespace Breadr.Service.ProfileManager
                 .Select(x => x.Salt).FirstOrDefaultAsync();
             if(salt == null)
             {
-                response.Message = "User not exist";
+                response.Message = "User does not exist";
                 return response;
             }
             string password = salt + request.Password;
@@ -52,6 +52,7 @@ namespace Breadr.Service.ProfileManager
                 UserDto userDto = await _context.Users.Where(x => x.Username.Equals(request.Username))
                     .Select(x => new UserDto
                     {
+                        Id = x.UserId,
                         Name = x.Username,
                         Surname = x.Surname,
                         Username = x.Username,
