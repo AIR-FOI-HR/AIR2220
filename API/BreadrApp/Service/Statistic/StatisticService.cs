@@ -2,13 +2,6 @@
 using Breadr.Service.Statistic.Models;
 using DataAccess.DBContext;
 using Microsoft.EntityFrameworkCore;
-using Service.Report.Models;
-using Service.Statistic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service.Statistic
 {

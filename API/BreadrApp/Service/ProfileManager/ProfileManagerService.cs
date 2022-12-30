@@ -1,19 +1,11 @@
 ﻿using AutoMapper;
-using Breadr.Service.Gate.Models;
 using Breadr.Service.ProfileManager.Models;
 using DataAccess.DBContext;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Cryptography;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Intrinsics.Arm;
 using Breadr.Service.ProfileManager.Dtos;
-using Breadr.Service.Gate.Dtos;
 using DataAccess.Models;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Breadr.Service.ProfileManager
 {

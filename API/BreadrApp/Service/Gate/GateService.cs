@@ -2,15 +2,7 @@
 using Breadr.Service.Gate.Models;
 using DataAccess.DBContext;
 using DataAccess.Models;
-using Service.Report.Dtos;
-using Service.Report.Models;
-using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using AutoMapper;
 
 namespace Breadr.Service.Gate
@@ -137,6 +129,17 @@ namespace Breadr.Service.Gate
             await _context.Gates.AddAsync(gate);
             await _context.SaveChangesAsync();
 
+            Log log = new()
+            {
+                DateTime = DateTime.Now,
+                GateId = gate.GateId,
+                Action = "new gate created",
+                UserId = request.UserId,
+            };
+
+            await _context.Logs.AddAsync(log);
+            await _context.SaveChangesAsync();
+
             DataAccess.Models.Gate addedGate = await _context.Gates.Where(x => x.GateId == gate.GateId).FirstOrDefaultAsync();
             GateDto gateDto = _mapper.Map<DataAccess.Models.Gate, GateDto>(addedGate);
 
@@ -173,6 +176,16 @@ namespace Breadr.Service.Gate
             DataAccess.Models.Gate disableGate = await _context.Gates.Where(x => x.Active ==1 && x.GateId.Equals(request.GateId)).FirstOrDefaultAsync();
             disableGate.Active = 0;
             await _context.SaveChangesAsync();
+
+            Log log = new()
+            {
+                DateTime = DateTime.Now,
+                GateId = request.GateId,
+                Action = "gate disabled",
+                UserId = request.UserId,
+            };
+            await _context.SaveChangesAsync();
+
             GateDto gateDto = _mapper.Map<DataAccess.Models.Gate,GateDto>(disableGate);
             response.Gate = gateDto;
             response.Success = true;
@@ -201,6 +214,15 @@ namespace Breadr.Service.Gate
 
             await _context.SaveChangesAsync();
 
+            Log log = new()
+            {
+                DateTime = DateTime.Now,
+                GateId = request.GateId,
+                Action = "gate edited",
+                UserId = request.UserId,
+            };
+            await _context.SaveChangesAsync();
+
             GateDto gateDto = _mapper.Map<DataAccess.Models.Gate,GateDto>(updateGate);
             response.Gate = gateDto;
             response.Success = true;
@@ -217,6 +239,16 @@ namespace Breadr.Service.Gate
             DataAccess.Models.Gate disableGate = await _context.Gates.Where(x => x.Active == 0 && x.GateId.Equals(request.GateId)).FirstOrDefaultAsync();
             disableGate.Active = 1;
             await _context.SaveChangesAsync();
+
+            Log log = new()
+            {
+                DateTime = DateTime.Now,
+                GateId = request.GateId,
+                Action = "gate enabled",
+                UserId = request.UserId,
+            };
+            await _context.SaveChangesAsync();
+
             GateDto gateDto = _mapper.Map<DataAccess.Models.Gate, GateDto>(disableGate);
             response.Gate = gateDto;
             response.Success = true;

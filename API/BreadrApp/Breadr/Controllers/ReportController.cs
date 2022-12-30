@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using Breadr.Core.Web;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Service.Report;
 using Service.Report.Models;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using System.Web.Helpers;
 
 namespace Breadr.Controllers
 {

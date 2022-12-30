@@ -1,10 +1,4 @@
-﻿using Breadr.Service.Gate.Models;
-using Breadr.Service.ProfileManager.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Breadr.Service.ProfileManager.Models;
 
 namespace Breadr.Service.ProfileManager
 {

@@ -4,12 +4,6 @@ using Breadr.Service.Gate;
 using Breadr.Service.Gate.Models;
 using Breadr.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Service.Report;
-using Service.Report.Models;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using System.Web.Helpers;
 
 namespace Breadr.Controllers
 {
@@ -89,7 +83,7 @@ namespace Breadr.Controllers
 
         
         [HttpPost("Gate")]
-        public async Task<IActionResult> AddNewGate([FromBody] GateViewModel gate) //JSON ARRAY???
+        public async Task<IActionResult> AddNewGate([FromBody] GateViewModel gate)
         {
 
             GateRequest request = _mapper.Map(gate,CreateServiceRequest<GateRequest>());
@@ -102,9 +96,9 @@ namespace Breadr.Controllers
 
             return Ok(response.Gate); 
         }
-        
 
-        
+
+        // todo: dodaj usera
         [HttpPut("Gate")]
         public async Task<IActionResult> EditGate([FromBody] GateViewModel gate) //JSON ARRAY???
         {
@@ -119,9 +113,9 @@ namespace Breadr.Controllers
 
             return Ok(response.Gate);
         }
-        
 
-        
+
+        // todo: dodaj usera
         [HttpPatch("DisableGate/{gateId}")]
         public async Task<IActionResult> DisableGate([FromRoute] string gateId) //JSON ARRAY???
         {
@@ -137,9 +131,9 @@ namespace Breadr.Controllers
 
             return Ok(response.Gate);
         }
-        
 
-        
+
+        // todo: dodaj usera
         [HttpPatch("EnableGate/{gateId}")]
         public async Task<IActionResult> EnableGate(string gateId) //JSON ARRAY???
         {

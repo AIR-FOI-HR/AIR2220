@@ -1,5 +1,4 @@
-﻿using Breadr.Service.Gate.Models;
-using DataAccess.DBContext;
+﻿using DataAccess.DBContext;
 using Microsoft.EntityFrameworkCore;
 using Service.Report.Dtos;
 using Service.Report.Models;

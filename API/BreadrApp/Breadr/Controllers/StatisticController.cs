@@ -1,15 +1,6 @@
 ﻿using AutoMapper;
 using Breadr.Core.Web;
-using Breadr.Service.Gate;
-using Breadr.Service.Gate.Models;
-using Breadr.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Service.Report;
-using Service.Report.Models;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
-using System.Web.Helpers;
 using Breadr.Service.Statistic.Models;
 using Service.Statistic;
 

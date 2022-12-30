@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using Breadr.Core.Web;
-using Breadr.Service.Gate;
-using Breadr.Service.Gate.Models;
 using Breadr.Service.ProfileManager;
 using Breadr.Service.ProfileManager.Models;
-using Breadr.Service.Statistic.Models;
 using Breadr.ViewModels;
-using DataAccess.Models;
 using Microsoft.AspNetCore.Mvc;
 
 

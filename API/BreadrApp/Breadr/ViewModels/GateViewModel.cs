@@ -8,5 +8,6 @@
         public long Latitude { get; set; }
         public long Longitude { get; set; }
         public decimal Price { get; set; }
+        public int UserId { get; set; }
     }
 }

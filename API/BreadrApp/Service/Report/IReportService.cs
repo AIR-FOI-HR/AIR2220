@@ -1,10 +1,4 @@
-﻿using Breadr.Service.Gate.Models;
-using Service.Report.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Service.Report.Models;
 
 namespace Service.Report
 {
@@ -13,7 +7,6 @@ namespace Service.Report
         Task<GetReportsResponse> GetAllReports(GetReportsRequest request);
         Task<GetReportsResponse> GetReportsByUser(GetReportsRequest request);
         Task<RegisterUserResponse> RegisterUser(RegisterUserRequest request);
-        Task<KeepAliveResponse> KeepAlive(KeepAliveRequest request);
 
     }
 }
