@@ -44,9 +44,13 @@ namespace Breadr.Service.Gate
                 Longitude = x.Longitude,
                 Price = x.Price,
                 Keepalive = x.Keepalive,
-                Active = x.Active
+                Active = x.Active,
+                SelledProductsToday = _context.Logs.Where(y => y.GateId == x.GateId 
+                    && y.DateTime == DateTime.Today && y.Action.Equals("purchase made")).Count(),
+                SelledProductsYesterday = _context.Logs.Where(y => y.GateId == x.GateId
+                    && y.DateTime == DateTime.Today.AddDays(-1) && y.Action.Equals("purchase made")).Count()
 
-            }).ToListAsync();
+        }).ToListAsync();
 
             response.Gates = gates;
             response.Success = true;

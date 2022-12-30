@@ -16,5 +16,7 @@ namespace Breadr.Service.Gate.Dtos
         public decimal Price { get; set; }
         public DateTime Keepalive { get; set; }
         public int Active { get; set; }
+        public int SelledProductsToday { get; set; }
+        public int SelledProductsYesterday { get; set; }
     }
 }
