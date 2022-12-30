@@ -1,6 +1,7 @@
 $(document).ready(function(){
     console.log("JavaScript is connected.");
     
+    //SIGN IN code
     if(!checkSignInCookie()){
         var path = window.location.pathname;
         var page = path.split("/").pop().split(".")[0];
@@ -84,6 +85,7 @@ $(document).ready(function(){
         }
     }
 
+    //GATES PAGE code
     if($("#table-gates").length > 0){
         var path = window.location.href;
         var attributes = path.split("/").pop().split("?");
@@ -95,32 +97,42 @@ $(document).ready(function(){
             var action = gateData[1].split('=')[1];
 
             if(action === "1"){
-                //URL for disabling the gate
-                var URL = "https://mocki.io/v1/98c398aa-3422-469d-b485-55c1cc7ac0db";
-                //type is PATCH
-                $.ajax({type: "GET", url: URL, data: {gate_id: gateId}, dataType: "json", complete: function(data){
-                    var msg = $.parseJSON(data.responseText);
-                    if(msg["action"] === "success"){
-                        $("#action-info").append("<span>Gate is successfully deactivated!</span>");
-                    }
-                    else{
-                        $("#action-info").append("<span>An error occurred!</span>");
-                    }
-                }});
+                if(confirm("Are you sure you want to deactivate gate " + gateId + "?")){
+                    //URL for disabling the gate
+                    var URL = "https://mocki.io/v1/98c398aa-3422-469d-b485-55c1cc7ac0db";
+                    //type is PATCH
+                    $.ajax({type: "GET", url: URL, data: {gate_id: gateId}, dataType: "json", complete: function(data){
+                        var msg = $.parseJSON(data.responseText);
+                        if(msg["action"] === "success"){
+                            $("#action-info").append("<span>Gate is successfully deactivated!</span>");
+                        }
+                        else{
+                            $("#action-info").append("<span>An error occurred!</span>");
+                        }
+                    }});
+                }
+                else{
+                    window.location.replace("./gates.html");
+                }
             }
             else{
-                //URL for enabling the gate
-                var URL = "https://mocki.io/v1/98c398aa-3422-469d-b485-55c1cc7ac0db";
-                //type is PATCH
-                $.ajax({type: "GET", url: URL, data: {gate_id: gateId}, dataType: "json", complete: function(data){
-                    var msg = $.parseJSON(data.responseText);
-                    if(msg["action"] === "success"){
-                        $("#action-info").append("<span>Gate is successfully activated!</span>");
-                    }
-                    else{
-                        $("#action-info").append("<span>An error occurred!</span>");
-                    }
-                }});
+                if(confirm("Are you sure you want to activate gate " + gateId + "?")){
+                    //URL for enabling the gate
+                    var URL = "https://mocki.io/v1/98c398aa-3422-469d-b485-55c1cc7ac0db";
+                    //type is PATCH
+                    $.ajax({type: "GET", url: URL, data: {gate_id: gateId}, dataType: "json", complete: function(data){
+                        var msg = $.parseJSON(data.responseText);
+                        if(msg["action"] === "success"){
+                            $("#action-info").append("<span>Gate is successfully activated!</span>");
+                        }
+                        else{
+                            $("#action-info").append("<span>An error occurred!</span>");
+                        }
+                    }});
+                }
+                else{
+                    window.location.replace("./gates.html");
+                }
             }
             $("#action-info").show();
             loadGates();
@@ -181,6 +193,7 @@ $(document).ready(function(){
         window.location.replace("./gatesCU.html");
     });
 
+    //ADD NEW OR EDITING GATES PAGE code
     if($("#CU-section").length > 0){
         gateCU();
     }
@@ -248,6 +261,8 @@ $(document).ready(function(){
     });
 });
 
+
+//GOOGLE MAP code
 function initMap() {
     //Get data from API (APIs URL)
     //Fake API for testing purposes
