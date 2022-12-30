@@ -66,12 +66,6 @@ namespace Service.Report
         }        
 
 
-        public Task<KeepAliveResponse> KeepAlive(KeepAliveRequest request)
-        {
-            throw new NotImplementedException();
-        }
-
-
         public Task<RegisterUserResponse> RegisterUser(RegisterUserRequest request)
         {
             throw new NotImplementedException();

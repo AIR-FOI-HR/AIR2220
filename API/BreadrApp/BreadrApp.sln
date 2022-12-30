@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Breadr.DataAccess", "DataAc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Breadr.Service", "Service\Breadr.Service.csproj", "{6F693594-4A96-4CBC-B0BC-4963ACD7DEDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breadr.Core", "Breadr.Core\Breadr.Core.csproj", "{5AB2DD46-D36D-41A4-A68C-C9C0DAD23D69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Breadr.Core", "Breadr.Core\Breadr.Core.csproj", "{5AB2DD46-D36D-41A4-A68C-C9C0DAD23D69}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{7EFC117A-D7A4-45DD-B66D-803E15C56D2D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{5AB2DD46-D36D-41A4-A68C-C9C0DAD23D69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AB2DD46-D36D-41A4-A68C-C9C0DAD23D69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AB2DD46-D36D-41A4-A68C-C9C0DAD23D69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7EFC117A-D7A4-45DD-B66D-803E15C56D2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7EFC117A-D7A4-45DD-B66D-803E15C56D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7EFC117A-D7A4-45DD-B66D-803E15C56D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7EFC117A-D7A4-45DD-B66D-803E15C56D2D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
