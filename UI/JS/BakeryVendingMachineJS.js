@@ -259,6 +259,71 @@ $(document).ready(function(){
         }
         
     });
+
+    //REPORTS PAGE code
+    if($("#table-reports").length > 0){
+        LoadUsers();
+        LoadReports("none");
+    }
+
+    function LoadUsers(){
+        //get all users
+        //users json {"a":{"user_id": 1, "username": "iivic", "active": 1, "role_id": 1}, "b":{"user_id": 2, "username": "ihorvat", "active": 1, "role_id": 2}, "c":{"user_id": 3, "username": "johny", "active": 1, "role_id": 2}, "d":{"user_id": 4, "username": "jeremy", "active": 1, "role_id": 2}, "e":{"user_id": 5, "username": "markovic", "active": 0, "role_id": 2}}
+        var URL = "https://mocki.io/v1/f0794ea0-afe3-4132-b024-b7d6730933bf";
+            $.ajax({type: "GET", url: URL, dataType: "json", complete: function(data){
+                var users = $.parseJSON(data.responseText);
+                var options = "";
+                for(u in users){
+                    if(users[u].role_id !== 1){
+                        options += "<option value='" + users[u].user_id + "'>" + users[u].username + "</option>";
+                    }
+                }
+                $("#users").append(options);
+            }});
+    }
+
+    function LoadReports(filter){
+        $("#table-reports").empty();
+        if(filter !== "none"){
+            //code for loading reports for specific user
+            //todo
+        }
+        else{
+            //code for loading all reports
+            //json for allusers {"a":{"username": "ihorvat", "product": "Baguette", "action":"purchase made", "gate": "TG_001", "date": "2022-11-01 10:10:10"}, "b":{"username": "johny", "product": "Bread", "action":"purchase made", "gate": "TG_002", "date": "2022-11-02 10:10:10"}, "c":{"username": "jeremy", "product": "Muffin", "action":"purchase made", "gate": "TG_003", "date": "2022-11-03 10:10:10"}, "d":{"username": "markovic", "product": "Bagel", "action":"purchase made", "gate": "TG_004", "date": "2022-11-04 10:10:10"}, "e":{"username": "jeremy", "product": "Muffin", "action":"purchase made", "gate": "TG_005", "date": "2022-11-05 10:10:10"}, "f":{"username": "johny", "product": "Baguette", "action":"purchase made", "gate": "TG_001", "date": "2022-11-06 10:10:10"}}
+            var URL = "https://mocki.io/v1/d6e950ab-697a-4e84-9c16-7e3155351df6";
+            $.ajax({type: "GET", url: URL, dataType: "json", complete: function(data){
+                var reports = $.parseJSON(data.responseText);
+                var table = '<table class="table table-striped table-hover">' +
+                '<thead>' +
+                  '<tr>' +
+                    '<th scope="col">User</th>' +
+                    '<th scope="col">Product</th>' +
+                    '<th scope="col">Action</th>' +
+                    '<th scope="col">Gate</th>' +
+                    '<th scope="col">Date and time</th>' +
+                  '</tr>' +
+                '</thead>' +
+                '<tbody>';
+                for(r in reports){
+                    table += '<tr>' +
+                    '<th scope="row">' + reports[r].username + '</th>' +
+                    '<td>' + reports[r].product + '</td>' +
+                    '<td>' + reports[r].action + '</td>' +
+                    '<td>' + reports[r].gate + '</td>' +
+                    '<td>' + reports[r].date + '</td>' +
+                  '</tr>';
+                }
+                table += '</tbody></table>';
+                $("#table-reports").append(table);
+            }});
+        }
+    }
+
+    //when selection changes this function is executed
+    $("#users").change(function(){
+        LoadReports($(this).val());
+    });
 });
 
 

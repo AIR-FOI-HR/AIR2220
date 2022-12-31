@@ -150,3 +150,7 @@ a.nav-link:hover{
     right: 30px;
     top: 40px;
 }
+
+#users{
+    width: 250px;
+}
