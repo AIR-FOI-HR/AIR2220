@@ -26,11 +26,11 @@ $(document).ready(function(){
 
             //temp if for working with mock api
             if(password == "1234"){
-                // JSON: {"name":"Pero", "surname":"Peric", "email":"pperic@gmail.com", "username": "pperic", "rolse_id":1}
-                var URL = "https://mocki.io/v1/71c3eef6-f4ca-43f3-ae8f-16524480bff1";
+                // JSON: {"user_id":2, "name":"Pero", "surname":"Peric", "email":"pperic@gmail.com", "username": "pperic", "role_id":1}
+                var URL = "https://mocki.io/v1/45490a6c-ded7-417f-9d20-e105dd051d66";
             }else{
-                //JSON: {"name":null, "surname":null, "email":null, "username": null, "rolse_id":null}
-                var URL = "https://mocki.io/v1/e27d8a2f-574f-4cfd-bfb3-a9b1dde4bcf5";
+                //JSON: {"user_id":null, "name":null, "surname":null, "email":null, "username": null, "role_id":null}
+                var URL = "https://mocki.io/v1/11160ad0-fe19-43b7-9682-39fcf3022f4c";
             }
 
             //SEND: email,password RECEIVE: name, surname, email, username, role_id
@@ -41,10 +41,10 @@ $(document).ready(function(){
                 var user = $.parseJSON(data.responseText);
                 
                 //change to role_id!
-                if(user["name"] != null && user["rolse_id"] == 1){
+                if(user["name"] != null && user["role_id"] == 1){
                     var expDate = new Date;
                     expDate.setDate(parseInt(expDate.getDate()) + parseInt(1));
-                    var cookieString = "signedIn=" + user["username"] + "; expires=" + expDate + ";path=/";
+                    var cookieString = "signedIn=username=" + user["username"] + "&userId=" + user["user_id"] + "; expires=" + expDate + ";path=/";
                     document.cookie = cookieString;
 
                     window.location.replace("./dashboard.html");
@@ -69,7 +69,7 @@ $(document).ready(function(){
         var cookies = document.cookie.split('; ');
         if(cookies !== null){
             for(var i=0; i<cookies.length; i++){
-                var cookieName = cookies[i].split('=');
+                var cookieName = cookies[i].split('&')[0].split('=');
                 if(cookieName[0] === "signedIn"){
                     if(cookieName[1] !== "null"){
                         return true;
@@ -105,6 +105,7 @@ $(document).ready(function(){
                         var msg = $.parseJSON(data.responseText);
                         if(msg["action"] === "success"){
                             $("#action-info").append("<span>Gate is successfully deactivated!</span>");
+                            SendLog(3);
                         }
                         else{
                             $("#action-info").append("<span>An error occurred!</span>");
@@ -124,6 +125,7 @@ $(document).ready(function(){
                         var msg = $.parseJSON(data.responseText);
                         if(msg["action"] === "success"){
                             $("#action-info").append("<span>Gate is successfully activated!</span>");
+                            SendLog(4);
                         }
                         else{
                             $("#action-info").append("<span>An error occurred!</span>");
@@ -243,10 +245,14 @@ $(document).ready(function(){
             $("#error-CU").hide();
             var path = window.location.href;
             var action = path.split("/").pop().split("?")[1];
-            if(action)
+            if(action){
                 var URL = ""; //URL for edit gate
-            else
+                SendLog(2);
+            }
+            else{
                 var URL = ""; // URL for creating inew gate
+                SendLog(1);
+            }
     
             $.ajax({type: "POST", url: URL, data: {product_name: $("#productName").val(), quantity: $("#quantity").val(), latitude: $("#lat").val(), longitude: $("#lon").val(), price: $("#price").val()}, dataType: "json", complete: function(data){
             }});
@@ -259,6 +265,39 @@ $(document).ready(function(){
         }
         
     });
+
+    function getSignedUserId(){
+        var cookies = document.cookie.split('; ');
+            for(var i=0; i<cookies.length; i++){
+                var cookieName = cookies[i].split('&');
+                if(cookieName[0].split('=')[0] === "signedIn"){
+                    return cookieName[1].split('=')[1].toString();
+                }
+            }
+    }
+
+    function SendLog(action){
+        var userId = getSignedUserId();
+        if(action === 1){
+            //URL for new gate
+            var URL = "";
+        }
+        if(action === 2){
+            //URL for edit gate
+            var URL = "";
+        }
+        if(action === 3){
+            //URL for deactivate gate
+            var URL = "";
+        }
+        if(action === 4){
+            //URL for activate gate
+            var URL = "";
+        }
+        //maybe change type
+        $.ajax({type: "GET", url: URL, data: {user_id: userId}, dataType: "json", complete: function(data){  
+        }});
+    }
 
     //REPORTS PAGE code
     if($("#table-reports").length > 0){
