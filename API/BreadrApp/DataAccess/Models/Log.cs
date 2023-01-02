@@ -17,7 +17,7 @@ namespace DataAccess.Models
         public int UserId { get; set; }
         public virtual User User { get; set; }
 
-        public string GateId { get; set; }
+        public string? GateId { get; set; }
         public virtual Gate Gate { get; set; }
     }
 }

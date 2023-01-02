@@ -1,5 +1,10 @@
+using Breadr.Service.Gate;
+using Breadr.Service.ProfileManager;
 using DataAccess.DBContext;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Service.Report;
+using Service.Statistic;
 
 namespace Breadr
 {
@@ -19,6 +24,12 @@ namespace Breadr
             builder.Services.AddDbContext<BreadrDbContext>(options => options.UseSqlServer(
                     builder.Configuration.GetConnectionString("DefaultConnection")
                 ));
+            builder.Services.AddScoped<IReportService, ReportService>();
+            builder.Services.AddScoped<IGateService, GateService>();
+            builder.Services.AddScoped<IStatisticService, StatisticService>();
+            builder.Services.AddScoped<IProfileManagerService, ProfileManagerService>();
+
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 

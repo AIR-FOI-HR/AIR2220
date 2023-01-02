@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  breadr:
+    image: ${DOCKER_REGISTRY-}breadr
+    build:
+      context: .
+      dockerfile: Breadr\Dockerfile
