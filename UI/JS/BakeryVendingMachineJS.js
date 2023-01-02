@@ -286,7 +286,33 @@ $(document).ready(function(){
         $("#table-reports").empty();
         if(filter !== "none"){
             //code for loading reports for specific user
-            //todo
+            //json for user: {"a":{"username": "ihorvat", "product": "Baguette", "action":"purchase made", "gate": "TG_001", "date": "2022-11-05 10:10:10"}, "b":{"username": "ihorvat", "product": "Bread", "action":"purchase made", "gate": "TG_002", "date": "2022-11-06 10:10:10"}, "c":{"username": "ihorvat", "product": "Muffin", "action":"purchase declined", "gate": "TG_003", "date": "2022-11-07 10:10:10"}}
+            var URL = "https://mocki.io/v1/eb6ddaa1-1216-4066-98d9-fdc542cf50af";
+            $.ajax({type: "GET", url: URL, data: {userId: filter}, dataType: "json", complete: function(data){
+                var reports = $.parseJSON(data.responseText);
+                var table = '<table class="table table-striped table-hover">' +
+                '<thead>' +
+                  '<tr>' +
+                    '<th scope="col">User</th>' +
+                    '<th scope="col">Product</th>' +
+                    '<th scope="col">Action</th>' +
+                    '<th scope="col">Gate</th>' +
+                    '<th scope="col">Date and time</th>' +
+                  '</tr>' +
+                '</thead>' +
+                '<tbody>';
+                for(r in reports){
+                    table += '<tr>' +
+                    '<th scope="row">' + reports[r].username + '</th>' +
+                    '<td>' + reports[r].product + '</td>' +
+                    '<td>' + reports[r].action + '</td>' +
+                    '<td>' + reports[r].gate + '</td>' +
+                    '<td>' + reports[r].date + '</td>' +
+                  '</tr>';
+                }
+                table += '</tbody></table>';
+                $("#table-reports").append(table);
+            }});
         }
         else{
             //code for loading all reports
@@ -324,6 +350,9 @@ $(document).ready(function(){
     $("#users").change(function(){
         LoadReports($(this).val());
     });
+
+    //STATISTICS PAGE code
+    //todo
 });
 
 
