@@ -391,7 +391,18 @@ $(document).ready(function(){
     });
 
     //STATISTICS PAGE code
-    //todo
+    if($("#graph").length > 0){
+        DrawGraph();
+    }
+
+    function DrawGraph(){
+        $("#graph").append('<canvas id="chart" style="width:100%;max-width:700px"></canvas>');
+        var chart = new Chart("chart", {
+            type: "line",
+            data: {},
+            options: {}
+          });
+    }
 });
 
 
