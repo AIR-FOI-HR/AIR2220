@@ -392,16 +392,122 @@ $(document).ready(function(){
 
     //STATISTICS PAGE code
     if($("#graph").length > 0){
-        DrawGraph();
+        LoadGates();
+        DrawGraph(1, null);
     }
 
-    function DrawGraph(){
-        $("#graph").append('<canvas id="chart" style="width:100%;max-width:700px"></canvas>');
-        var chart = new Chart("chart", {
-            type: "line",
-            data: {},
-            options: {}
-          });
+    $("#filter-apply-time").click(function(e){
+        e.preventDefault();
+        //loads time filters
+        var filter_type = $("#time-span").val();
+        if(filter_type === "hour"){
+            DrawGraph(2, $("#time").val());
+        }
+        if(filter_type === "day"){
+            DrawGraph(3, $("#time").val());
+        }
+        if(filter_type === "week"){
+            DrawGraph(4, $("#time").val());
+        }
+    });
+
+    $("#filter-apply-gate").click(function(e){
+        e.preventDefault();
+        //filters by gates
+        DrawGraph(5, $("#gates-filter").val());
+    });
+
+    $("#filter-payment-stat").click(function(e){
+        e.preventDefault();
+        //TODO, filter for payments, two datasets
+        DrawGraph(6, "TODO");
+    });
+
+    $("#filter-reset-stat").click(function(e){
+        e.preventDefault();
+        //resets filters
+        $("#time").val(0);
+        $("#time-span").val("hour");
+        $("#gates-filter").val("none");
+        DrawGraph(1, null);
+    });
+
+    function DrawGraph(filter, data){
+        $("#chart-area").empty();
+        if(filter === 1){
+            //url for all statistics
+            var URL = "https://mocki.io/v1/e17d8eba-9ceb-4f66-8638-41eb473221e3";
+            var text = "All gates sales";
+        }
+        if(filter === 2){
+            //by hour
+            var URL = "";
+            console.log(data);
+        }
+        if(filter === 3){
+            //by day
+            var URL = "";
+            console.log(data);
+        }
+        if(filter === 4){
+            //by week
+            var URL = "";
+            console.log(data);
+        }
+        if(filter === 5){
+            //by gate
+            var URL = "";
+            console.log(data);
+        }
+        if(filter === 6){
+            //by payments
+            var URL = "";
+            console.log(data);
+        }
+        
+        $.ajax({type: "GET", url: URL, dataType: "json", complete: function(data){
+            var data = $.parseJSON(data.responseText);
+            
+            var gates = [];
+            var gates_data = [];
+            for(d in data){
+                gates.push(data[d]["gate_id"]);
+                gates_data.push(data[d]["num_of_sales"]);
+            }
+            
+            $("#chart-area").append('<canvas id="chart" style="width:100%;max-width:800px"></canvas>');
+            var chart = new Chart("chart", {
+                type: "bar",
+                data: {
+                    labels: gates,
+                    datasets: [{
+                        data: gates_data,
+                        backgroundColor: "#007BFF",
+                    }]
+                },
+                options: {
+                    legend: {display: false},
+                    title: {
+                        display: true,
+                        text: text
+                    }
+                }
+            });
+        }});
+    }
+
+    function LoadGates(){
+        //get all gates
+        //mock data for gates: {"a":{"gate_id":"TG_001", "product_name": "Baguette", "quantity": 10, "lat": 46.309436, "lon": 16.329482, "price": 1.50, "keepalive_time":"2022-12-28 11:44:56", "active": 1, "todays_sales": 15, "yesterdays_sales": 23}, "b":{"gate_id":"TG_002", "product_name": "Croissant", "quantity": 15, "lat": 45.309436, "lon": 15.329482, "price": 1.25, "keepalive_time":"2022-12-28 11:45:26", "active": 0, "todays_sales": 29, "yesterdays_sales": 28}, "c":{"gate_id":"TG_003", "product_name": "Muffin", "quantity": 7, "lat": 47.309436, "lon": 17.329482, "price": 2.00, "keepalive_time":"2022-12-28 11:45:45", "active": 1, "todays_sales": 7, "yesterdays_sales": 10}}
+        var URL = "https://mocki.io/v1/18629954-0762-4f63-9013-bcca3a78f10e";
+            $.ajax({type: "GET", url: URL, dataType: "json", complete: function(data){
+                var gates = $.parseJSON(data.responseText);
+                var options = "";
+                for(g in gates){
+                    options += "<option value='" + gates[g].gate_id + "'>" + gates[g].gate_id + "</option>";
+                }
+                $("#gates-filter").append(options);
+            }});
     }
 });
 

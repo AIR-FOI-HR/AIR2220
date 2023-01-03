@@ -154,3 +154,7 @@ a.nav-link:hover{
 #users{
     width: 250px;
 }
+
+#filter{
+    width: 100%;
+}
