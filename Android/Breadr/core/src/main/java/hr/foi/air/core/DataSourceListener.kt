@@ -16,3 +16,6 @@ interface PurchaseDataSourceListener {
 interface UserDataSourceListener {
     fun onUserLoaded(user: User)
 }
+interface AuthenticationDataSourceListener {
+    fun onAuthenticationLoaded(status: Boolean)
+}

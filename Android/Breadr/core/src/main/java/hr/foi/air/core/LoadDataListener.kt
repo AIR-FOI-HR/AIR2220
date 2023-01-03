@@ -15,3 +15,6 @@ interface LoadDataPurchaseListener {
 interface LoadDataUserListener {
     fun onUserLoaded(user: User)
 }
+interface LoadDataAuthenticationListener {
+    fun onAuthenticationLoaded(status: Boolean)
+}

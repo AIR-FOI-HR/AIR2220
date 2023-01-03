@@ -1,22 +1,21 @@
 package hr.foi.air.ws
 
 import android.content.Context
-import hr.foi.air.core.ItemDataSource
-import hr.foi.air.core.ItemDataSourceListener
-import hr.foi.air.core.PurchaseDataSource
-import hr.foi.air.core.PurchaseDataSourceListener
+import hr.foi.air.core.*
 import hr.foi.air.core.entities.Item
 import hr.foi.air.ws.handlers.WebServiceHandler
 import hr.foi.air.core.entities.Receipt
 
-class WsDataSource : ItemDataSource, PurchaseDataSource {
+class WsDataSource : ItemDataSource, PurchaseDataSource, AuthenticationDataSource {
     lateinit var item : Item
     lateinit var receipt: Receipt
     private lateinit var itemListener: ItemDataSourceListener
     private lateinit var purchaseListener: PurchaseDataSourceListener
+    private lateinit var authenticationListener: AuthenticationDataSourceListener
 
     var itemArrived = false
     var purchaseArrived = false
+    var authArrived = false
 
     override fun loadItem(listener: ItemDataSourceListener, context: Context, gateId: Int) {
         this.itemListener = listener
@@ -32,6 +31,7 @@ class WsDataSource : ItemDataSource, PurchaseDataSource {
 
         purchaseCaller.buyProduct(gateId, dataHandler, userId)
     }
+
     @Suppress("UNCHECKED_CAST")
     private val dataHandler : WebServiceHandler =
         object : WebServiceHandler{
@@ -45,6 +45,23 @@ class WsDataSource : ItemDataSource, PurchaseDataSource {
                 purchaseArrived = true
                 purchaseListener.onPurchaseLoaded(receipt)
             }
+
+            override fun <T> onAuthenticationArrived(
+                result: Boolean,
+                ok: Boolean,
+                timestamp: Long?
+            ) {
+                authArrived = true
+                authenticationListener.onAuthenticationLoaded(result)
+            }
         }
+
+    override fun authenticate(listener: AuthenticationDataSourceListener, context: Context, email: String, password: String) {
+        this.authenticationListener = listener
+
+        val authenticationCaller = WebServiceCaller()
+
+        authenticationCaller.logInUser(dataHandler, email, password)
+    }
 
 }

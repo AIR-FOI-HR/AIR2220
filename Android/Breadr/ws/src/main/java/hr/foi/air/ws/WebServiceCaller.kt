@@ -5,7 +5,9 @@ import hr.foi.air.core.entities.Item
 import hr.foi.air.core.entities.Receipt
 import hr.foi.air.ws.handlers.WebServiceHandler
 import hr.foi.air.ws.responses.ItemResponse
+import hr.foi.air.ws.responses.LoginResponse
 import hr.foi.air.ws.responses.PurchaseResponse
+import hr.foi.air.ws.responses.RegisterResponse
 import okhttp3.OkHttpClient
 import retrofit2.*
 import retrofit2.converter.gson.GsonConverterFactory
@@ -63,7 +65,6 @@ class WebServiceCaller {
 
     fun buyProduct(gateId: Int, dataArrivedHandler: WebServiceHandler, userId: Int) {
         var serviceAPI = retrofit.create(WebService::class.java)
-        // TODO("remove hard coded user id")
         var call: Call<PurchaseResponse> = serviceAPI.buyProduct(userId, gateId)
 
         call.enqueue(
@@ -74,10 +75,11 @@ class WebServiceCaller {
                 ) {
                     try {
                         if (response != null && response.isSuccessful) {
-                            dataArrivedHandler.onPurchaseArrived<Receipt>(
-                                // TODO(change null assertion)
-                                response.body()!!.transform(), true, response.body()?.timeStamp
-                            )
+                            response.body()?.let {
+                                dataArrivedHandler.onPurchaseArrived<Receipt>(
+                                    it.transform(), true, response.body()?.timeStamp
+                                )
+                            }
                         } else {
                             Log.d(TAG, "global error")
                             //TODO("an error occurred")
@@ -89,6 +91,70 @@ class WebServiceCaller {
                 }
 
                 override fun onFailure(call: Call<PurchaseResponse>, t: Throwable) {
+                    Log.d(TAG, "global failure: $t")
+                    TODO("Not yet implemented")
+                }
+            }
+        )
+    }
+    fun registerUser(firstname: String, dataArrivedHandler: WebServiceHandler, lastName: String, email: String, password: String) {
+        var serviceAPI = retrofit.create(WebService::class.java)
+        var call: Call<RegisterResponse> = serviceAPI.register(firstname, lastName, email, password)
+        call.enqueue(
+            object : Callback<RegisterResponse> {
+                override fun onResponse(
+                    call: Call<RegisterResponse>,
+                    response: Response<RegisterResponse>
+                ) {
+                    try {
+                        if (response != null && response.isSuccessful) {
+                            response.body()?.let {
+                                dataArrivedHandler.onAuthenticationArrived <Boolean>(
+                                    it.status, true, response.body()?.timeStamp
+                                )
+                            }
+                        } else {
+                            Log.d(TAG, "global error")
+                            //TODO("an error occurred")
+                        }
+                    } catch (ex: Exception) {
+                        Log.d(TAG, "error occurred: $ex")
+                        //TODO("Response processing exception")
+                    }
+                }
+                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    Log.d(TAG, "global failure: $t")
+                    TODO("Not yet implemented")
+                }
+            }
+        )
+    }
+    fun logInUser(dataArrivedHandler: WebServiceHandler, email: String, password: String) {
+        var serviceAPI = retrofit.create(WebService::class.java)
+        var call: Call<LoginResponse> = serviceAPI.logIn(email, password)
+        call.enqueue(
+            object : Callback<LoginResponse> {
+                override fun onResponse(
+                    call: Call<LoginResponse>,
+                    response: Response<LoginResponse>
+                ) {
+                    try {
+                        if (response != null && response.isSuccessful) {
+                            response.body()?.let {
+                                dataArrivedHandler.onAuthenticationArrived <Boolean>(
+                                    it.status, true, response.body()?.timeStamp
+                                )
+                            }
+                        } else {
+                            Log.d(TAG, "global error")
+                            //TODO("an error occurred")
+                        }
+                    } catch (ex: Exception) {
+                        Log.d(TAG, "error occurred: $ex")
+                        //TODO("Response processing exception")
+                    }
+                }
+                override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                     Log.d(TAG, "global failure: $t")
                     TODO("Not yet implemented")
                 }

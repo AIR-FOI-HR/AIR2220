@@ -47,8 +47,10 @@ def predict(cards: Cards):
     return cards.total_value
 
 
+# Breadr:
+
 @app.post('/breadr/getProduct')
-def return_bread(gate_id):
+def get_product(gate_id):
     now =  datetime.now()
     bread = {
         "id": 9,
@@ -62,7 +64,7 @@ def return_bread(gate_id):
     return bread
 
 @app.post('/breadr/buyProduct')
-def return_bread(user_id, gate_id):
+def buy_product(user_id, gate_id):
     now =  datetime.now()
     response = {
         "gateId": 1,
@@ -85,3 +87,22 @@ def return_bread():
         "timeStamp": math.floor(datetime.timestamp(now))
     }
     return bread
+
+
+@app.post('/breadr/login')
+def login():
+    now =  datetime.now()
+    response = {
+        "status": True,
+        "timeStamp": math.floor(datetime.timestamp(now))
+    }
+    return response
+
+@app.post('/breadr/register')
+def sign_up():
+    now =  datetime.now()
+    response = {
+        "status": True,
+        "timeStamp": math.floor(datetime.timestamp(now))
+    }
+    return response

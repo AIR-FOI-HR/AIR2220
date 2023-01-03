@@ -13,3 +13,7 @@ interface PurchaseDataSource {
 interface UserDataSource {
     fun loadUser(listener: UserDataSourceListener, context: Context)
 }
+
+interface AuthenticationDataSource {
+    fun authenticate(listener: AuthenticationDataSourceListener, context: Context, email: String, password: String)
+}
