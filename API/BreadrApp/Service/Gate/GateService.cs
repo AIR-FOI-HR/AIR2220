@@ -200,6 +200,8 @@ namespace Breadr.Service.Gate
                 Request = request
             };
 
+            string actionText = "gate edited";
+
             DataAccess.Models.Gate updateGate = await _context.Gates.Where(x => x.GateId.Equals(request.GateId)).FirstOrDefaultAsync();
             if (request.ProductName != null)
                 updateGate.ProductName = request.ProductName;
@@ -211,14 +213,22 @@ namespace Breadr.Service.Gate
                 updateGate.Longitude = request.Longitude;
             if (request.Price != null)
                 updateGate.Price = request.Price;
+            if(request.Keepalive != null)
+            {
+                updateGate.Keepalive = request.Keepalive;
+                actionText = "gate keepalive";
+            }
+                
 
             await _context.SaveChangesAsync();
+
+
 
             Log log = new()
             {
                 DateTime = DateTime.Now,
                 GateId = request.GateId,
-                Action = "gate edited",
+                Action = actionText,
                 UserId = request.UserId,
             };
             await _context.SaveChangesAsync();

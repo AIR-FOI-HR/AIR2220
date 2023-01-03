@@ -20,7 +20,7 @@ namespace Breadr.Controllers
             _gateService = gateService;
             _mapper = mapper;
 
-            MqttReceiver.KeepAliveListener();
+            MqttReceiver.KeepAliveListener(this);
         }
         
         [HttpGet("AllGates")]
@@ -107,6 +107,20 @@ namespace Breadr.Controllers
         {
 
             GateRequest request = _mapper.Map(gate,CreateServiceRequest<GateRequest>());
+            GateResponse response = await _gateService.EditGate(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.Gate);
+        }
+
+        public async Task<IActionResult> Keepalive(GateViewModel gate)
+        {
+
+            GateRequest request = _mapper.Map(gate, CreateServiceRequest<GateRequest>());
             GateResponse response = await _gateService.EditGate(request);
 
             if (!response.Success)

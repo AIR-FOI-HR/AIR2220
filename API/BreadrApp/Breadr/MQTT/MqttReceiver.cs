@@ -5,13 +5,17 @@ using MQTTnet.Client;
 using MQTTnet;
 using MQTTnet.Server;
 using System.Text;
+using Breadr.Service.Gate;
+using AutoMapper;
+using Azure.Core;
+using Breadr.Service.Gate.Models;
+using Breadr.ViewModels;
 
 namespace Breadr.MQTT
 {
     public static class MqttReceiver
     {
-        //public static string Address = "air2220.mobilisis.hr/api/";
-        public static async Task KeepAliveListener()
+        public static async Task KeepAliveListener(GateController gateController)
         {
             var mqttFactory = new MqttFactory();
             IMqttClient client = mqttFactory.CreateMqttClient();
@@ -28,14 +32,16 @@ namespace Breadr.MQTT
                 if (message.Contains("keepalive"))
                 {
                     var substrng = message.Split(':');
-                    var table = substrng[1].Split(",");
-                    Console.WriteLine(table[0].Replace("\"", ""));
+                    var target = substrng[1].Split(",");
+                    var gateId = target[0].Replace("\"", "");
 
-                    /*using (var webClient = new System.Net.WebClient())
-                    {
-                        data =
-                        webClient.UploadData(Address, "PUT", data);
-                    }*/
+                    var gate = new GateViewModel();
+                    gate.GateId = gateId;
+                    gate.Keepalive = DateTime.Now;
+
+
+                    gateController.Keepalive(gate);
+
                 }
                 return Task.CompletedTask;
             };
