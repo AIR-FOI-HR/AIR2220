@@ -13,7 +13,9 @@ namespace Breadr.Service.Gate.Models
             public long Longitude { get; set; }
             public decimal Price { get; set; }
             public int UserId { get; set; }
-        }
+            public DateTime Keepalive { get; set; }
+
+    }
         public class GateResponse : ResponseBase<GateRequest>
         {
             public GateDto Gate { get; set; }

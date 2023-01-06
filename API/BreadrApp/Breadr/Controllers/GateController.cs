@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Breadr.Core.Web;
+using Breadr.MQTT;
 using Breadr.Service.Gate;
 using Breadr.Service.Gate.Models;
 using Breadr.ViewModels;
@@ -18,6 +19,8 @@ namespace Breadr.Controllers
         {
             _gateService = gateService;
             _mapper = mapper;
+
+            MqttReceiver.KeepAliveListener(this);
         }
         
         [HttpGet("AllGates")]
@@ -100,7 +103,7 @@ namespace Breadr.Controllers
 
         // todo: dodaj usera
         [HttpPut("Gate")]
-        public async Task<IActionResult> EditGate([FromBody] GateViewModel gate) //JSON ARRAY???
+        public async Task<IActionResult> EditGate([FromBody] GateViewModel gate) 
         {
 
             GateRequest request = _mapper.Map(gate,CreateServiceRequest<GateRequest>());
@@ -114,10 +117,24 @@ namespace Breadr.Controllers
             return Ok(response.Gate);
         }
 
+        public async Task<IActionResult> Keepalive(GateViewModel gate)
+        {
+
+            GateRequest request = _mapper.Map(gate, CreateServiceRequest<GateRequest>());
+            GateResponse response = await _gateService.EditGate(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response.Message);
+            }
+
+            return Ok(response.Gate);
+        }
+
 
         // todo: dodaj usera
         [HttpPatch("DisableGate/{gateId}")]
-        public async Task<IActionResult> DisableGate([FromRoute] string gateId) //JSON ARRAY???
+        public async Task<IActionResult> DisableGate([FromRoute] string gateId) 
         {
 
             GateRequest request = CreateServiceRequest<GateRequest>();

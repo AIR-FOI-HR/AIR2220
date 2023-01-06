@@ -6,7 +6,7 @@ namespace Breadr.MQTT
     public static class MqttSender
     {
         
-        public static async Task MqttSend(string gateId,string operation)
+        public static async Task MqttSend(string gateId,string operation = "open")
         {
   
             var mqttFactory = new MqttFactory();
