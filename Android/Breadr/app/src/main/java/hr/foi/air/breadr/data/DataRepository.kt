@@ -51,4 +51,39 @@ class DataRepository() {
 
         }, context)
     }
+
+    //needs cheking
+    fun loadLogin(context : Context, listener: LoadDataAuthenticationListener, username: String, password: String) {
+        // TODO("return error if not online")
+        //check if device is online
+        val internetCheck = InternetCheck()
+        val isOnline = internetCheck.isOnline(context)
+
+
+        val dataSource = WsDataSource()
+        dataSource.authenticate(object : AuthenticationDataSourceListener {
+            override fun onAuthenticationLoaded(status: Boolean) {
+                listener.onAuthenticationLoaded(status)
+            }
+
+        }, context, username, password)
+    }
+
+    //not finished, not sure if listener is correct
+    /**
+    fun loadSignup(context : Context, listener: LoadDataAuthenticationListener, name: String, surname: String, username: String, email:String, password:String){
+        // TODO("return error if not online")
+        //check if device is online
+        val internetCheck = InternetCheck()
+        val isOnline = internetCheck.isOnline(context)
+
+
+        val dataSource = WsDataSource()
+        dataSource.authenticate(object : AuthenticationDataSourceListener {
+            override fun onAuthenticationLoaded(status: Boolean) {
+                listener.onAuthenticationLoaded(status)
+            }
+
+        }, context, name, surname, username, email, password)
+    }**/
 }

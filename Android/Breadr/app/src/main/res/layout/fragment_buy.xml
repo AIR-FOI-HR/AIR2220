@@ -10,6 +10,7 @@
         android:id="@+id/tv_item_name"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginTop="70sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +32,8 @@
         android:id="@+id/tv_label_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:layout_marginLeft="50sp"
         app:layout_constraintTop_toBottomOf="@id/iv_item_picture"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tv_item_quantity"
@@ -39,9 +42,10 @@
         android:id="@+id/tv_item_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:layout_marginLeft="10sp"
         app:layout_constraintTop_toBottomOf="@id/iv_item_picture"
         app:layout_constraintStart_toEndOf="@id/tv_label_quantity"
-        app:layout_constraintEnd_toEndOf="parent"
         android:text="1" />
 
     <!--    price   -->
@@ -49,6 +53,8 @@
         android:id="@+id/tv_label_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:layout_marginLeft="20sp"
         app:layout_constraintTop_toBottomOf="@id/tv_label_quantity"
         app:layout_constraintEnd_toEndOf="@+id/tv_item_price"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,9 +63,10 @@
         android:id="@+id/tv_item_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:layout_marginLeft="10sp"
         app:layout_constraintTop_toBottomOf="@id/tv_item_quantity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/tv_label_price"
+        app:layout_constraintStart_toEndOf="@id/tv_label_price"
         android:text="€ 1,49" />
 
     <!--    buttons   -->

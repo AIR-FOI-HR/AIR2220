@@ -18,7 +18,7 @@ class WebServiceCaller {
     private lateinit var retrofit: Retrofit
 
     // TODO("change to production URL")
-    private val baseUrl: String = "http://10.0.2.2:8000/breadr/"
+    private val baseUrl: String = "http://127.0.0.1:8000/breadr/"
 
     init {
         retrofit = Retrofit.Builder()

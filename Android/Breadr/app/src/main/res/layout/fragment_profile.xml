@@ -22,6 +22,9 @@
         android:layout_height="wrap_content"
         android:text="Firstname Lastname"
         android:id="@+id/tv_profile_name"
+        android:layout_marginTop="70sp"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/iv_profile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -32,6 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email:"
+        android:layout_marginTop="30sp"
+        android:layout_marginLeft="75sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_email_input"
         app:layout_constraintTop_toBottomOf="@+id/tv_profile_name"/>
@@ -41,8 +46,9 @@
         android:layout_height="wrap_content"
         android:text="email@example.com"
         android:ems="10"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="10sp"
         app:layout_constraintStart_toEndOf="@+id/tv_email_label"
-        app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@+id/tv_profile_name"/>
     <TextView
@@ -50,6 +56,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Password:"
+        android:layout_marginTop="30sp"
+        android:layout_marginLeft="75sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_password_input"
         app:layout_constraintTop_toBottomOf="@+id/tv_email_input"/>
@@ -59,8 +67,9 @@
         android:layout_height="wrap_content"
         android:text="Password123!"
         android:ems="10"
+        android:layout_marginTop="20sp"
+        android:layout_marginLeft="10sp"
         app:layout_constraintStart_toEndOf="@+id/tv_password_label"
-        app:layout_constraintEnd_toEndOf="parent"
         android:inputType="textPassword"
         app:layout_constraintTop_toBottomOf="@+id/tv_email_input"/>
     <TextView
@@ -68,6 +77,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Notifications:"
+        android:layout_marginTop="30sp"
+        android:layout_marginLeft="75sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/tv_password_input"
         app:layout_constraintTop_toBottomOf="@+id/tv_password_input"/>
@@ -75,8 +86,9 @@
         android:id="@+id/sw_notifications_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="27sp"
+        android:layout_marginLeft="20sp"
         app:layout_constraintStart_toEndOf="@+id/tv_notifications_label"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_password_input"/>
 
     <!--    buttons   -->
@@ -84,19 +96,19 @@
         android:id="@+id/btn_profile_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
         app:layout_constraintTop_toBottomOf="@id/tv_notifications_label"
         app:layout_constraintEnd_toStartOf="@+id/btn_profile_save"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:text="Cancel"/>
     <Button
         android:id="@+id/btn_profile_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50sp"
         app:layout_constraintTop_toBottomOf="@id/tv_notifications_label"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/btn_profile_cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:text="Confirm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
